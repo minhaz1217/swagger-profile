@@ -3,6 +3,16 @@
     "name": "swagger-profile",
     "version": "1.0.0",
     "description": "An extension to create and use swagger authorizations keys.",
+    "permissions": [
+        "contextMenus",
+        "activeTab",
+        "*://*/swagger/index.html"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
     "content_scripts": [
         {
             "matches": [
