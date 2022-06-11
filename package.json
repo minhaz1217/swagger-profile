@@ -1,0 +1,14 @@
+{
+  "name": "swagger-profile",
+  "version": "1.0.0",
+  "description": "An extension to create and use swagger authorizations keys.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minhazul Hayat Khan",
+  "license": "ISC",
+  "devDependencies": {
+    "webextension-polyfill": "^0.9.0"
+  }
+}

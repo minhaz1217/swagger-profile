@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "swagger-profile",
+    "version": "1.0.0",
+    "description": "An extension to create and use swagger authorizations keys.",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/swagger/index.html"
+            ],
+            "js": [
+                "index.js"
+            ]
+        }
+    ]
+}
