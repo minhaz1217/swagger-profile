@@ -31,16 +31,47 @@ browser.contextMenus.create({
 
 
 function changeBearerToken(token) {
-    console.log(token);
-    const makeItGreen = 'document.body.style.border = "5px solid green"';
+    console.log("Token: " + token);
+    const setBearerToken = `
+    
+    // Open the form
+    if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
+        console.log("Hi 2");
+        let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
+        openAuthFormButton.click();
+    }else if(document.querySelector(".auth-wrapper .authorize.unlocked") !== null){
+        console.log("Hi 1");
+        let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.unlocked");
+        openAuthFormButton.click();
+    }
+    
+    setTimeout(function() {
+        
+        // if logout button is showing we at first click on it, then we paste the token.
+        if(document.getElementsByClassName("auth authorize")[0] === undefined){
+            document.getElementsByClassName("auth")[0].click();
+        }
+        var tokenInput = document.querySelector(".auth-container input");
+        var authButton = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
+        var closeButton = document.querySelector("button.btn-done");
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(tokenInput, "${token}");
+        
+        var inputEvent = new Event('input', { bubbles: true});
+        tokenInput.dispatchEvent(inputEvent);
+        authButton.click();
+        closeButton.click();
+        alert("Token set to: ${token}");
+    }, 500);
+    `;
     browser.tabs.executeScript({
-        code: makeItGreen
+        code: setBearerToken
     }).then(
         executed => {
-            console.log(`We made it green `, executed);
+            console.log(`Token Changed: `, executed);
         },
         error => {
-            console.log(`Error: ${error}`);
+            console.log(error);
         }
     );
 }
