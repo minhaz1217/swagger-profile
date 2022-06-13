@@ -41,22 +41,17 @@ var userToken = "Hello World";
 
 // Changes the Bearer token by UI.
 function changeBearerToken(token) {
-    console.log("Token: " + token);
-    const setBearerToken = `
-    
+    const setBearerToken = `    
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
-        console.log("Hi 2");
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
         openAuthFormButton.click();
     }else if(document.querySelector(".auth-wrapper .authorize.unlocked") !== null){
-        console.log("Hi 1");
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.unlocked");
         openAuthFormButton.click();
     }
     
     setTimeout(function() {
-        
         // if logout button is showing we at first click on it, then we paste the token.
         if(document.getElementsByClassName("auth authorize")[0] === undefined){
             document.getElementsByClassName("auth")[0].click();
@@ -95,19 +90,15 @@ function executeBrowserScript(code) {
 function changeTokenByPrompt() {
     var changeTokenCode = `
         var userToken = prompt("Enter Token: ");
-
-        
         const sending = browser.runtime.sendMessage({type: "passingToken", content: userToken});
         sending.then(
-            executed => {console.log("Sent: ", executed);},
+            executed => {},
             error => {console.log("Error: ", error);}
         );
 
 
         // const channel = new BroadcastChannel("token-exchange-channel");
         // channel.postMessage({ token: userToken });
-
-        console.log({ token: userToken });
     `;
 
     executeBrowserScript(changeTokenCode);
@@ -117,7 +108,7 @@ function changeTokenByPrompt() {
 // Sets up message passing listener that's used to pass message from UI to background.
 function setupMessagePassingListener() {
     browser.runtime.onMessage.addListener(function (message, callback) {
-        console.log("Message Received: ", message);
+        // console.log("Message Received: ", message);
         if (message.type == "passingToken") {
             userToken = message.content;
         };
