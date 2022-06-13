@@ -33,11 +33,13 @@ browser.contextMenus.create({
     parentId: "profiles",
     type: "radio",
     title: "Change Token",
-    onclick: changeToken
+    onclick: changeTokenByPrompt
 });
 
 var userToken = "Hello World";
 
+
+// Changes the Bearer token by UI.
 function changeBearerToken(token) {
     console.log("Token: " + token);
     const setBearerToken = `
@@ -74,30 +76,59 @@ function changeBearerToken(token) {
     `;
     executeBrowserScript(setBearerToken);
 }
-function executeBrowserScript(code){
+
+// Execute the code in the browser. In browser the JS code has access to the DOM.
+function executeBrowserScript(code) {
     browser.tabs.executeScript({
         code: code
     }).then(
         executed => {
-            console.log(`Token Changed: `, executed);
+            console.log("Executed: ", executed);
         },
         error => {
-            console.log(error);
+            console.log("Error: ", error);
         }
     );
 }
-function changeToken(){
+
+// Changes the default token by asking with a prompt.
+function changeTokenByPrompt() {
     var changeTokenCode = `
         var userToken = prompt("Enter Token: ");
+
+        
+        const sending = browser.runtime.sendMessage({type: "passingToken", content: userToken});
+        sending.then(
+            executed => {console.log("Sent: ", executed);},
+            error => {console.log("Error: ", error);}
+        );
+
+
+        // const channel = new BroadcastChannel("token-exchange-channel");
+        // channel.postMessage({ token: userToken });
+
+        console.log({ token: userToken });
     `;
+
     executeBrowserScript(changeTokenCode);
-    
 }
-prompt("HI");
+
+
+// Sets up message passing listener that's used to pass message from UI to background.
+function setupMessagePassingListener() {
+    browser.runtime.onMessage.addListener(function (message, callback) {
+        console.log("Message Received: ", message);
+        if (message.type == "passingToken") {
+            userToken = message.content;
+        };
+    });
+}
+
+setupMessagePassingListener();
+
+
+// Is executed when one of the profile menu item is clicked.
 function profileSelected(e) {
     changeBearerToken(userToken);
-    // console.log(document.querySelector(".auth-container form"));
-    // console.log(tabs.get());
-    // console.log(e);
     return;
 }
