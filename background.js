@@ -28,7 +28,15 @@ browser.contextMenus.create({
     title: "Profile 3",
     onclick: profileSelected
 });
+browser.contextMenus.create({
+    id: "changeToken",
+    parentId: "profiles",
+    type: "radio",
+    title: "Change Token",
+    onclick: changeToken
+});
 
+var userToken = "Hello World";
 
 function changeBearerToken(token) {
     console.log("Token: " + token);
@@ -64,8 +72,11 @@ function changeBearerToken(token) {
         alert("Token set to: ${token}");
     }, 500);
     `;
+    executeBrowserScript(setBearerToken);
+}
+function executeBrowserScript(code){
     browser.tabs.executeScript({
-        code: setBearerToken
+        code: code
     }).then(
         executed => {
             console.log(`Token Changed: `, executed);
@@ -75,9 +86,16 @@ function changeBearerToken(token) {
         }
     );
 }
-
+function changeToken(){
+    var changeTokenCode = `
+        var userToken = prompt("Enter Token: ");
+    `;
+    executeBrowserScript(changeTokenCode);
+    
+}
+prompt("HI");
 function profileSelected(e) {
-    changeBearerToken("Hello 123");
+    changeBearerToken(userToken);
     // console.log(document.querySelector(".auth-container form"));
     // console.log(tabs.get());
     // console.log(e);
