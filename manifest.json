@@ -6,7 +6,8 @@
     "permissions": [
         "contextMenus",
         "activeTab",
-        "*://*/swagger/index.html"
+        "*://*/swagger/index.html",
+        "storage"
     ],
     "background": {
         "scripts": [

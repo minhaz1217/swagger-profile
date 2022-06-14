@@ -104,6 +104,11 @@ function changeTokenByPrompt() {
     executeBrowserScript(changeTokenCode);
 }
 
+var defaultData = {
+    tokens: [
+        { name: "Profile 1", token: "Hello World" }
+    ]
+};
 
 // Sets up message passing listener that's used to pass message from UI to background.
 function setupMessagePassingListener() {
@@ -111,15 +116,46 @@ function setupMessagePassingListener() {
         // console.log("Message Received: ", message);
         if (message.type == "passingToken") {
             userToken = message.content;
+            browser.storage.local.set({ "token": "My Token" }).then(printData, printError);
         };
     });
 }
-
 setupMessagePassingListener();
 
-
+var count = 0;
 // Is executed when one of the profile menu item is clicked.
-function profileSelected(e) {
-    changeBearerToken(userToken);
+async function profileSelected(e) {
+    // changeBearerToken(userToken);
+
+    await getStorageData();
+    setStorageData({ "data": "Hi This is the data " + count++ });
+
     return;
 }
+function setStorageData(data) {
+    browser.storage.local.set(data).then(printData, printError);
+}
+
+async function getStorageData() {
+    var data = null;
+    await browser.storage.local.get().then(
+        val => { data = val; console.log("Reached: ", data); return val; },
+        printError
+    );
+    console.log("Reached Here: ", data);
+    return data;
+}
+function initStorage() {
+    browser.storage.local.get().then(
+        val => {
+            if (val == null) {
+
+            }
+            console.log(val);
+        },
+        error => { console.log("Error: ", error); }
+    );
+}
+
+function printData(data) { if (data != null) console.log(data); }
+function printError(error) { console.log(error); }
