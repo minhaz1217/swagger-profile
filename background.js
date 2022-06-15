@@ -5,39 +5,22 @@ browser.contextMenus.create({
     documentUrlPatterns: ["*://*/swagger/index.html"]
 });
 
-browser.contextMenus.create({
-    id: "profile-1",
-    parentId: "profiles",
-    type: "radio",
-    title: "Profile 1",
-    onclick: profileSelected
-});
+addContextMenuItem("profile-1", "Profile-1", "radio", "profiles", profileSelected);
+addContextMenuItem("changeToken", "Change Token", "radio", "profiles", changeTokenByPrompt);
 
-browser.contextMenus.create({
-    id: "profile-2",
-    parentId: "profiles",
-    type: "radio",
-    title: "Profile 2",
-    onclick: profileSelected
-});
 
-browser.contextMenus.create({
-    id: "profile-3",
-    parentId: "profiles",
-    type: "radio",
-    title: "Profile 3",
-    onclick: profileSelected
-});
-browser.contextMenus.create({
-    id: "changeToken",
-    parentId: "profiles",
-    type: "radio",
-    title: "Change Token",
-    onclick: changeTokenByPrompt
-});
+function addContextMenuItem(id, title, type, parentId = null, onClick = null) {
+    browser.contextMenus.create({
+        id: id,
+        title: title,
+        type: type,
+        parentId: parentId,
+        onclick: onClick
+    });
+}
+
 
 var userToken = "Hello World";
-
 
 // Changes the Bearer token by UI.
 function changeBearerToken(token) {
