@@ -1,40 +1,20 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SwaggerUIAppForTesting.Auth.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAuthJWTTokenServices(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAuthSwaggerGen(builder.Configuration);
 
 // For swagger.
 //builder.Services.AddSwaggerDocument();
-builder.Services.AddSwaggerGen(c =>
-                {
-                    c.AddSecurityDefinition(
-                        JwtBearerDefaults.AuthenticationScheme, //Name the security scheme
-                        new OpenApiSecurityScheme
-                        {
-                            Description = "JWT Authorization header using the Bearer scheme.",
-                            Type = SecuritySchemeType.Http, //We set the scheme type to http since we're using bearer authentication
-                            Scheme = "bearer"               //The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "bearer".
-                        });
 
-                    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                        {
-                            new OpenApiSecurityScheme {
-                                Reference = new OpenApiReference{
-                                    Id = JwtBearerDefaults.AuthenticationScheme,
-                                    Type = ReferenceType.SecurityScheme
-                                }
-                            },
-                            new List<string>()
-                        }
-                    });
-                });
 var app = builder.Build();
 
 app.UseSwagger();

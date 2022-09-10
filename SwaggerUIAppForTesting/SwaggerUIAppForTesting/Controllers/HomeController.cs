@@ -9,7 +9,6 @@ namespace simple_dotnet_app.Controllers
 {
     [Route("/")]
     [ApiController]
-    [CustomAuthenticationFilter]
     [Authorize]
     public class HomeController : ControllerBase
     {
