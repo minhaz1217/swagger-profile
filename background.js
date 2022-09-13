@@ -112,7 +112,7 @@ async function profileSelected(e) {
 
     await getStorageData();
     setStorageData({ "data": "Hi This is the data " + count++ });
-
+    changeBearerToken("Hi");
     return;
 }
 function setStorageData(data) {
