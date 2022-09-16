@@ -1,37 +1,51 @@
 'use strict';
 
-function addNewProfile(){
-    getStorageData();
+async function addNewProfile(){
+    await getStorageData();
+    setStorageData({ Hi: 3 });
     openExtensionPage("../extension-page/add_new_profile.html", "Add New Profile");
 }
 
 function showAllProfiles(){
-    setStorageData();
+    let hello = { Hi: 1, Hi2: 2 };
+    let monster = {
+      name: "Kraken",
+      tentacles: true,
+      eyeCount: 10
+    }
+    
+    let kitten = {
+      name: "Moggy",
+      tentacles: false,
+      eyeCount: 2
+    }
+    browser.storage.local.set({hello, kitten, monster}).then(printData, printError);
+    // setStorageData(hello, kitten, monster);
     openExtensionPage("../extension-page/show_all.html", "Show All Profiles");
 }
 
-function getStorageData(key){
-    let gettingItem = browser.storage.local.get();
-    gettingItem.then(onGot, onError);
+
+
+// Storage
+function setStorageData(data) {
+  browser.storage.local.set(data).then(printData, printError);
 }
 
-function setStorageData(){
-    browser.storage.local.set({
-        kitten:  {name:"Mog", eats:"mice"},
-        monster: {name:"Kraken", eats:"people"}
-      });
+async function getStorageData(key) {
+  var data = null;
+  await browser.storage.local.get(key).then(
+      val => { data = val; console.log("Reached: ", data); return val; },
+      printError
+  );
+  return data;
 }
 
-function onGot(item) {
-    console.log(item);
-  }
-  
-  function onError(error) {
-    console.log(`Error: ${error}`);
-  }
-  
+function printData(data) { if (data != null) console.log(data); }
+function printError(error) { console.log(error); }
+
 
 function openExtensionPage(url, titlePreface){
+  return;
     let createData = {
         titlePreface: titlePreface,
         type: "popup",
