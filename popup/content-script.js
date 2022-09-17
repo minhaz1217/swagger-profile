@@ -24,26 +24,6 @@ function showAllProfiles(){
     openExtensionPage("../extension-page/show_all.html", "Show All Profiles");
 }
 
-
-
-// Storage
-function setStorageData(data) {
-  browser.storage.local.set(data).then(printData, printError);
-}
-
-async function getStorageData(key) {
-  var data = null;
-  await browser.storage.local.get(key).then(
-      val => { data = val; console.log("Reached: ", data); return val; },
-      printError
-  );
-  return data;
-}
-
-function printData(data) { if (data != null) console.log(data); }
-function printError(error) { console.log(error); }
-
-
 function openExtensionPage(url, titlePreface){
   return;
     let createData = {
