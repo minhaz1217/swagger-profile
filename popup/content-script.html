@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link href="../public/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="../public/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="content-script.css" />
 </head>
 <body>
-    <div id="outer-wrapper">
-        <button id="addNewProfile">Add New Profile</button>
-        <button id="showAllProfiles">Show All Profiles</button>
+    <div class="container" id="outer-wrapper">
+        <a  class="btn btn-success" id="addNewProfile" href="./add-new-profile.html">Add New Profile</a>
+        <button class="btn btn-info" id="showAllProfiles">Show All Profiles</button>
     </div>
     <script src="content-script.js"></script>
 </body>
