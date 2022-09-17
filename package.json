@@ -4,6 +4,7 @@
   "description": "An extension to create and use swagger authorizations keys.",
   "main": "index.js",
   "scripts": {
+    "dev" : "web-ext run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Minhazul Hayat Khan",
