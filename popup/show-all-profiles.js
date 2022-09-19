@@ -5,7 +5,7 @@ async function loadAllProfiles(){
         // we have some profiles
         let profilesHtml = "";
         
-        data.profiles.sort((a, b)=> {return a.displayOrder < b.displayOrder});
+        data.profiles.sort((a, b)=> {return a.displayOrder >= b.displayOrder});
         data.profiles.forEach( (profile)=>{
             profilesHtml += makeSingleProfile(profile);
         } );
