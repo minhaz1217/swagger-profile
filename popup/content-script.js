@@ -1,10 +1,10 @@
 'use strict';
 
-async function addNewProfile(){
-    await getStorageData();
-    setStorageData({ Hi: 3 });
-    openExtensionPage("../extension-page/add_new_profile.html", "Add New Profile");
-}
+// async function addNewProfile(){
+//     await getStorageData();
+//     setStorageData({ Hi: 3 });
+//     openExtensionPage("../extension-page/add_new_profile.html", "Add New Profile");
+// }
 
 function showAllProfiles(){
     let hello = { Hi: 1, Hi2: 2 };

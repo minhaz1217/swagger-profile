@@ -8,6 +8,7 @@ async function getStorageData(key) {
     await browser.storage.local.get(key).then(
         (val) => {
             data = val;
+            console.log(key, data);
             return val;
         },
         printError
@@ -27,9 +28,10 @@ async function addNewProfile(profile) {
     if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
         let profiles = [];
         profiles.push(profile);
+        setStorageData({ profiles });
     } else {
         data.profiles.push(profile);
+        let profiles = data.profiles;
+        setStorageData({ profiles });
     }
-    let profiles = data.profiles;
-    setStorageData({ profiles });
 }
