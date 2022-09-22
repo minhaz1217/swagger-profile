@@ -33,7 +33,7 @@
             "32": "icons/popup.png"
         },
         "default_title": "Profile Manager",
-        "default_popup": "popup/content-script.html",
+        "default_popup": "popup/show-all-profiles.html",
         "browser_style": true
     }
 }
