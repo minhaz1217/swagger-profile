@@ -1,7 +1,6 @@
 async function loadAllProfiles() {
     let data = await getStorageData("profiles");
     let profilesDiv = $("#profiles");
-    console.log($("#profiles"));
     if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {
         // we have some profiles
         let profilesHtml = "";
@@ -10,6 +9,7 @@ async function loadAllProfiles() {
         data.profiles.forEach((profile) => {
             profilesHtml += makeSingleProfile(profile);
         });
+        
         profilesDiv.html(profilesHtml);
         afterProfilesLoads();
     } else {
@@ -20,8 +20,12 @@ async function loadAllProfiles() {
 function makeSingleProfile(profile) {
     return `
     <div class="mb-2 row">
-        <div class="h2 col-6">${profile.name}</div>
-        <button class="col-6 btn btn-primary applyButton" data-token="${profile.token}">Apply</button>
+    <div class="h2 col-6">${profile.name}</div>
+    <div class="col-6">
+        <button class="btn btn-success me-1 applyButton" data-token="${profile.token}" title="Apply profile"><i class="bi bi-check2-circle"></i></button>
+        <button class="btn btn-warning me-1 applyButton" data-token="${profile.token}" title="Edit"><i class="bi bi-pencil-square"></i></button>
+        <button class="btn btn-danger applyButton" data-token="${profile.token}" title="Delete"><i class="bi bi-trash"></i></button>
+    </div>
     </div>
         `;
 }
