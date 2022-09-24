@@ -1,4 +1,5 @@
 async function loadAllProfiles() {
+    console.log("PROFILES LOADED");
     let data = await getStorageData("profiles");
     let profilesDiv = $("#profiles");
     if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {
@@ -53,15 +54,21 @@ function applyToken(token) {
     changeBearerToken(token);
 }
 
-function listenForMessage(){
-    let myPort = browser.runtime.connect({name:"port-from-cs"});
-    myPort.postMessage({greeting: "hello from content script"});
-    console.log("LISTENING");
-    myPort.onMessage.addListener((m) => {
-        console.log("In content script, received message from background script: ");
-        console.log(m.greeting);
-    });
+function listenForMessageFromBrowserHTML(){    
+    browser.runtime.onMessage.addListener(messageFromBrowserHTML);
+}
+function messageFromBrowserHTML(message) {
+    if(message?.type === "delete"){
+        deleteProfileConfirmed(message?.data);
+    }
 }
 
-listenForMessage();
+function deleteProfileConfirmed(profileId){
+    if(profileId == null || profileId == ""){
+        return;
+    }
+    console.log("CONFIRMED", profileId);
+}
+
+listenForMessageFromBrowserHTML();
 loadAllProfiles();

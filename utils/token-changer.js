@@ -60,8 +60,7 @@ function deleteProfileById(profileId){
     const deleteTokenCode = `
         var choice = confirm("Are you sure? You want to delete this profile?");
         if(choice === true){
-            let myPort = browser.runtime.connect({name:"port-from-cs"});
-            myPort.postMessage({greeting: "Delete the ${profileId}"});
+            browser.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
         }else{
             console.log("No Delete");
         }
