@@ -35,3 +35,22 @@ async function addNewProfile(profile) {
         setStorageData({ profiles });
     }
 }
+
+async function getProfile(profileId){
+    if(profileId == null || profileId == ""){
+        return;
+    }
+
+    let data = await getStorageData("profiles");
+    if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
+        return null;
+    } else {
+        for(let i=0;i<data.profiles.length;i++){
+            if(data.profiles[i].id == profileId){
+                return data.profiles[i];
+            }
+        }
+    }
+    return null;
+
+}

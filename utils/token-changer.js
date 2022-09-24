@@ -34,6 +34,10 @@ function changeBearerToken(token) {
 
 // Execute the code in the browser. In browser the JS code has access to the DOM.
 function executeBrowserScript(code) {
+    if(code == null || code == ""){
+        return;
+    }
+
     browser.tabs.executeScript({
         code: code
     }).then(
@@ -44,4 +48,24 @@ function executeBrowserScript(code) {
             console.log("Error: ", error);
         }
     );
+}
+function deleteIt(token){
+    console.log("HI");
+}
+
+function deleteProfileById(profileId){
+    if(profileId == null || profileId == ""){
+        return;
+    }
+    const deleteTokenCode = `
+        var choice = confirm("Are you sure? You want to delete this profile?");
+        if(choice === true){
+            let myPort = browser.runtime.connect({name:"port-from-cs"});
+            myPort.postMessage({greeting: "Delete the ${profileId}"});
+        }else{
+            console.log("No Delete");
+        }
+    `;
+    executeBrowserScript(deleteTokenCode);
+    
 }
