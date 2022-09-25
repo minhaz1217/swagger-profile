@@ -45,7 +45,7 @@ function deleteProfile(profileId) {
     if(profileId == null || profileId == ""){
         return;
     }
-    deleteProfileById(profileId);
+    deleteProfileByIdConfirm(profileId);
 }
 function applyToken(token) {
     if(token == null || token == ""){
@@ -57,17 +57,17 @@ function applyToken(token) {
 function listenForMessageFromBrowserHTML(){    
     browser.runtime.onMessage.addListener(messageFromBrowserHTML);
 }
-function messageFromBrowserHTML(message) {
+async function messageFromBrowserHTML(message) {
     if(message?.type === "delete"){
-        deleteProfileConfirmed(message?.data);
+        await deleteProfileConfirmed(message?.data);
     }
 }
 
-function deleteProfileConfirmed(profileId){
+async function deleteProfileConfirmed(profileId){
     if(profileId == null || profileId == ""){
         return;
     }
-    console.log("CONFIRMED", profileId);
+    await deleteTheProfile(profileId);
 }
 
 listenForMessageFromBrowserHTML();

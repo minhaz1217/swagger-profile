@@ -36,21 +36,22 @@ async function addNewProfile(profile) {
     }
 }
 
-async function getProfile(profileId){
+async function deleteTheProfile(profileId){
     if(profileId == null || profileId == ""){
-        return;
+        return false;
     }
 
     let data = await getStorageData("profiles");
+    let profiles = [];
     if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
-        return null;
+        return false;
     } else {
         for(let i=0;i<data.profiles.length;i++){
-            if(data.profiles[i].id == profileId){
-                return data.profiles[i];
+            if(data.profiles[i].id != profileId){
+                profiles.push(data.profiles[i]);
             }
         }
     }
-    return null;
-
+    setStorageData({ profiles });
+    return true;
 }

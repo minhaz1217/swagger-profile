@@ -49,22 +49,16 @@ function executeBrowserScript(code) {
         }
     );
 }
-function deleteIt(token){
-    console.log("HI");
-}
 
-function deleteProfileById(profileId){
+function deleteProfileByIdConfirm(profileId){
     if(profileId == null || profileId == ""){
         return;
     }
-    const deleteTokenCode = `
+    let getConfirmationForProfileDelete = `
         var choice = confirm("Are you sure? You want to delete this profile?");
         if(choice === true){
             browser.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
-        }else{
-            console.log("No Delete");
         }
     `;
-    executeBrowserScript(deleteTokenCode);
-    
+    executeBrowserScript(getConfirmationForProfileDelete);
 }
