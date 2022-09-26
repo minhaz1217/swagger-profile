@@ -17,9 +17,18 @@
         <form>
             <div>
                 <!-- <label for="name" class="form-label">Name</label> -->
-                <input type="text" class="form-control mb-3" id="name" placeholder="Name">
-                <textarea class="form-control mb-3" id="token" rows="3" placeholder="Token"></textarea>
-                <input type="number" class="form-control mb-3" id="displayOrder" placeholder="Display Order">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Name" required>
+                    <div class="invalid-feedback visually-hidden" id="error-name"></div>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="token" rows="3" placeholder="Token" required></textarea>
+                    <div class="invalid-feedback visually-hidden" id="error-token"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" id="displayOrder" placeholder="Display Order" required>
+                    <div class="invalid-feedback visually-hidden" id="error-displayOrder"></div>
+                </div>
                 <input type="button" class="btn btn-outline-primary form-control mb-3" value="Save" id="saveToken"/>
             </div>
         </form>
