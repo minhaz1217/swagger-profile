@@ -12,7 +12,7 @@ async function saveToken() {
     await addNewProfile(profile);
 }
 
-function validateNameField(){
+function validateNameField() {
     let nameField = $("#name");
     let nameError = $("#error-name");
     let error = false;
@@ -30,7 +30,7 @@ function validateNameField(){
     return !error; // error == true means validation failed so we return false from the validation;
 }
 
-function validateTokenField(){
+function validateTokenField() {
     let tokenField = $("#token");
     let tokenError = $("#error-token");
     let error = false;
@@ -48,13 +48,13 @@ function validateTokenField(){
     return !error; // error == true means validation failed so we return false from the validation;
 }
 
-function validateDisplayOrder(){
+function validateDisplayOrder() {
     let displayOrderField = $("#displayOrder");
     let displayOrderError = $("#error-displayOrder");
     let error = false;
 
     if (displayOrderField.val() == null || displayOrderField.val() == "") {
-        let errorMessage = "Please enter a display order for the profile";
+        let errorMessage = "Please enter a display order(number) for the profile";
         displayOrderError.html(errorMessage);
         displayOrderError.removeClass("visually-hidden");
         displayOrderField.addClass("is-invalid");
@@ -70,12 +70,17 @@ function validateInputFields() {
     let nameFieldValidated = validateNameField();
     let tokenFieldValidated = validateTokenField();
     let displayOrderFieldValidated = validateDisplayOrder();
-    if( !nameFieldValidated || !tokenFieldValidated || !displayOrderFieldValidated ){
+    if (!nameFieldValidated || !tokenFieldValidated || !displayOrderFieldValidated) {
         return false;
     }
     return true;
 }
 validateInputFields();
+$(document).ready(function () {
+    $("#name").on("keyup", validateNameField);
+    $("#token").on("keyup", validateTokenField);
+    $("#displayOrder").on("keyup", validateDisplayOrder);
+});
 
 // TODO: add validation for empty
 // TODO: in successful save, show success message and the go back to previous screen.

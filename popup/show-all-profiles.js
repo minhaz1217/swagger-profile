@@ -1,5 +1,4 @@
 async function loadAllProfiles() {
-    console.log("PROFILES LOADED");
     let data = await getStorageData("profiles");
     let profilesDiv = $("#profiles");
     if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {
