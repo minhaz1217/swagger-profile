@@ -8,7 +8,6 @@ async function getStorageData(key) {
     await browser.storage.local.get(key).then(
         (val) => {
             data = val;
-            console.log(key, data);
             return val;
         },
         printError
