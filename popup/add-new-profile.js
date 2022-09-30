@@ -75,14 +75,15 @@ function validateInputFields() {
     }
     return true;
 }
-validateInputFields();
+
 $(document).ready(function () {
     $("#name").on("keyup", validateNameField);
     $("#token").on("keyup", validateTokenField);
     $("#displayOrder").on("keyup", validateDisplayOrder);
 });
 
-// TODO: add validation for empty
+validateInputFields();
+
 // TODO: in successful save, show success message and the go back to previous screen.
 // TODO: remove all online css and js, use only offline css and js (icons)
 // TODO: bug - display order is being saved as string, save it as number or sort it as number.
