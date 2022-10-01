@@ -7,7 +7,7 @@ async function saveToken() {
     var profile = {
         name: $("#name").val(),
         token: $("#token").val(),
-        displayOrder: $("#displayOrder").val()
+        displayOrder: Number($("#displayOrder").val())
     }
     await addNewProfile(profile);
 }
@@ -85,5 +85,3 @@ $(document).ready(function () {
 validateInputFields();
 
 // TODO: in successful save, show success message and the go back to previous screen.
-// TODO: remove all online css and js, use only offline css and js (icons)
-// TODO: bug - display order is being saved as string, save it as number or sort it as number.
