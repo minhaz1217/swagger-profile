@@ -1,25 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
-import "./index.css";
+import { createHashRouter } from "react-router-dom";
+import AddNewProfile from "../popup/add-new-profile.jsx";
+import Popup from "../popup/popup.jsx";
 
-const router = createBrowserRouter([
+const Router = createHashRouter([
     {
-      path: "/",
-      element: <div>Hello world!</div>,
+        path: "/*",
+        element: <Popup />,
     },
     {
-      path: "/add-new-profile",
-      element: <AddNewProfile />,
+        path: "/add-new-profile",
+        element: <AddNewProfile />,
     },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+export default Router;
