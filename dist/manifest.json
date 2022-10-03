@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "description": "An extension to create and use swagger authorizations tokens.",
     "permissions": [
-        "contextMenus",
         "activeTab",
         "*://*/swagger/index.html",
         "storage"
@@ -19,16 +18,12 @@
             ]
         }
     ],
-    "options_ui": {
-        "page": "options/options.html",
-        "browser_style": true
-    },
     "browser_action": {
         "default_icon": {
-            "32": "public/icons/popup.png"
+            "32": "icons/popup.png"
         },
         "default_title": "Profile Manager",
-        "default_popup": "popup/index.html",
+        "default_popup": "popup/popup.html",
         "browser_style": true
     }
 }

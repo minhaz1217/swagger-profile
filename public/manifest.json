@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "swagger-profile",
+    "version": "1.0.0",
+    "description": "An extension to create and use swagger authorizations tokens.",
+    "permissions": [
+        "activeTab",
+        "*://*/swagger/index.html",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/swagger/index.html"
+            ],
+            "js": [
+                "index.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": {
+            "32": "icons/popup.png"
+        },
+        "default_title": "Profile Manager",
+        "default_popup": "popup/popup.html",
+        "browser_style": true
+    }
+}
