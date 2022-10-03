@@ -83,5 +83,3 @@ $(document).ready(function () {
 });
 
 validateInputFields();
-
-// TODO: in successful save, show success message and the go back to previous screen.
