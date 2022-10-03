@@ -1,26 +1,32 @@
 import React from "react";
-import {render} from "react-dom"
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import Popup from "./popup.jsx";
+import AddNewProfile from "./add-new-profile.jsx";
 
-function Popup(){
-    return (
-        <div>
-            <div class="container">
+const router = createBrowserRouter([
+    {
+        path: "/*",
+        element: <Popup />,
+    },
 
-                <div class="m-2" style={{width: "20em"}}>
-                    <h1>All Profiles <a href="./add-new-profile.html" class="btn btn-success" title="Add new profile"><i class="bi bi-plus-circle"></i></a></h1>
-                    <div id="profiles"></div>
-                </div>
-            </div>
+    {
+        path: "/add-new-profile",
+        element: <AddNewProfile />,
+    },
+]);
 
-            <script src="../public/jquery-3.6.1.min.js"></script>
-            <script src="../public/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-            <script src="../utils/id-generator.js"></script>
-            <script src="../utils/storage.js"></script>
-            <script src="../utils/token-changer.js"></script>
-            <script src="./show-all-profiles.js"></script>
-        </div>
-    );
-}
+ReactDOM.createRoot(document.getElementById("react-app")).render(
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
+);
 
 
-render(<Popup />, document.getElementById("react-app"));
+
+
+
+
+
+
+
