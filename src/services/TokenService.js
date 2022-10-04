@@ -9,7 +9,7 @@ const executeBrowserScript = (code) => {
         code: code
     }).then(
         executed => {
-            console.log("Executed: ", executed);
+            // console.log("Executed: ", executed);
         },
         error => {
             console.log("Error: ", error);

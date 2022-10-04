@@ -1,8 +1,8 @@
+import { GenerateNewId } from "./IDGeneratorService";
 import { setStorageData, getStorageData } from "./StorageService";
 
 export const saveProfile = async (profile) => {
-
-    Object.assign(profile, { id: newId() });
+    Object.assign(profile, { id: GenerateNewId() });
 
     let data = await getStorageData("profiles");
     if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
