@@ -1,4 +1,4 @@
-function makeSingleProfile(profile) {
+export function makeSingleProfile(profile) {
     return `
     <div class="mb-2 row">
     <div class="h2 col-6">${profile.name}</div>
@@ -12,7 +12,7 @@ function makeSingleProfile(profile) {
 }
 
 
-function afterProfilesLoads() {
+export function afterProfilesLoads() {
     $(".applyButton").on("click", (e) => {
         applyToken(e.currentTarget.getAttribute("data-token"));
     });
@@ -25,42 +25,42 @@ function afterProfilesLoads() {
     });
 }
 
-function editProfile(profileId) {
+export function editProfile(profileId) {
     if(profileId == null || profileId == ""){
         return;
     }
     console.log("Edit Profile");
 }
-function deleteProfile(profileId) {
+export function deleteProfile(profileId) {
     if(profileId == null || profileId == ""){
         return;
     }
     deleteProfileByIdConfirm(profileId);
 }
-function applyToken(token) {
+export function applyToken(token) {
     if(token == null || token == ""){
         return;
     }
     changeBearerToken(token);
 }
 
-function listenForMessageFromBrowserHTML(){    
+export function listenForMessageFromBrowserHTML(){    
     browser.runtime.onMessage.addListener(messageFromBrowserHTML);
 }
-async function messageFromBrowserHTML(message) {
+export async function messageFromBrowserHTML(message) {
     if(message?.type === "delete"){
         await deleteProfileConfirmed(message?.data);
     }
 }
 
-async function deleteProfileConfirmed(profileId){
+export async function deleteProfileConfirmed(profileId){
     if(profileId == null || profileId == ""){
         return;
     }
     await deleteTheProfile(profileId);
 }
 
-async function loadAllProfiles() {
+export async function loadAllProfiles() {
     let data = await getStorageData("profiles");
     let profilesDiv = $("#profiles");
     if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {

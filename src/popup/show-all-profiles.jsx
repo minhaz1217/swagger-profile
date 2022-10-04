@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import jQuery from "jquery";
+import { getStorageData } from "../utils/storage";
 const ShowAllProfiles = () => {
-
-    useEffect(()=>{
-        console.log("CALLING FROM INSIDE USE EFFECT");
+    const [profiles, setProfiles] = useState({});
+    useEffect(() => {
+        // let profiles = await getStorageData("profiles");
+        // console.log("Profiles", profiles);
     }, []);
     return (
         <div>

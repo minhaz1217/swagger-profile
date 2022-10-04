@@ -1,5 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom"
+
+
+const saveToken = ()=>{
+    console.log("SAVE TOKEN");
+}
+
 function AddNewProfile() {
     return (
         <div class="container m-2" style={{ width: '20em' }}>
@@ -19,7 +25,7 @@ function AddNewProfile() {
                         <input type="number" class="form-control" id="displayOrder" placeholder="Display Order" required />
                         <div class="invalid-feedback visually-hidden" id="error-displayOrder"></div>
                     </div>
-                    <input type="button" class="btn btn-outline-primary form-control mb-3" value="Save" id="saveToken" />
+                    <input type="button" class="btn btn-outline-primary form-control mb-3" value="Save" id="saveToken" onClick={saveToken}/>
                 </div>
             </form>
         </div>
