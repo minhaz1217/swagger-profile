@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, Redirect, useHistory, useNavigate, Navigate } from "react-router-dom"
 import { saveProfile } from "../services/SwaggerProfileService";
 
-
-
-
-
 function AddNewProfile() {
-    const [name, setName] = useState("");
+    const [name, setName] = useState("0");
     const [nameValidated, setNameValidated] = useState(false);
     const [displayOrder, setDisplayOrder] = useState(0);
     const [displayOrderValidated, setDisplayOrderValidated] = useState(true);
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState("0");
     const [tokenValidated, setTokenValidated] = useState(false);
-
+    const [redirectToShowAllProfile, setRedirectToShowAllProfile] = useState(false);
     const saveToken = async () => {
         var profile = {
             name: name,
             token: token,
             displayOrder: Number(displayOrder)
         }
-        await saveProfile(profile);
+        let profileSaved = await saveProfile(profile);
+        if (profileSaved) {
+            setRedirectToShowAllProfile(true);
+        }
     }
 
     const validateNameField = (e) => {
@@ -79,6 +78,7 @@ function AddNewProfile() {
 
     return (
         <div className="container m-2" style={{ width: '20em' }}>
+            {redirectToShowAllProfile && <Navigate to="/" />}
             <Link to="/" className="btn btn-primary" title="Show All Profiles"><i className="bi bi-list-ul"></i></Link>
             <h1>Add new profile </h1>
             <form>

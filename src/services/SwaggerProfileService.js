@@ -14,6 +14,7 @@ export const saveProfile = async (profile) => {
         let profiles = data.profiles;
         setStorageData({ profiles });
     }
+    return true;
 }
 
 export const deleteProfile = async (profileId) => {
