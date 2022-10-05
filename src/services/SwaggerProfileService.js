@@ -36,3 +36,14 @@ export const deleteProfile = async (profileId) => {
     setStorageData({ profiles });
     return true;
 }
+
+// returns all the profiles sorted by display order.
+export const getAllProfiles = async () => {
+    let data = await getStorageData("profiles");
+    if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {
+        data.profiles.sort((a, b) => { return a.displayOrder >= b.displayOrder });
+        return data.profiles;
+    } else {
+        return null;
+    }
+}
