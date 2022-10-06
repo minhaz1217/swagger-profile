@@ -19,3 +19,5 @@ ReactDOM.createRoot(document.getElementById("react-app")).render(
 // TODO: add typescript support
 // TODO: rename popup to show all page
 // TODO: add in memory router.
+
+// TODO: bug, after updating the show all page isn't refetching the data.

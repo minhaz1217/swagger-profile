@@ -1,7 +1,9 @@
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { changeBearerToken, deleteProfileWebConfirmation } from "../services/TokenService.js"
 const Profile = (props) => {
+    const navigate = useNavigate();
 
     const onClickApplyButton = () => {
         if (props.profile?.token == null || props.profile?.token == "") {
@@ -10,7 +12,11 @@ const Profile = (props) => {
         changeBearerToken(props.profile.token);
     }
     const onClickEditButton = () => {
-
+        navigate("/add-new-profile", { 
+            state :{
+                profile : props.profile
+            } 
+        });
     }
     const onClickDeleteButton = () => {
         if (props.profile?.token == null || props.profile?.token == "") {
