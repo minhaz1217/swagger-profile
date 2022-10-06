@@ -1,17 +1,35 @@
 
 import React, { useEffect, useState } from "react";
+import { changeBearerToken, deleteProfileWebConfirmation } from "../services/TokenService.js"
 const Profile = (props) => {
+
+    const onClickApplyButton = () => {
+        if (props.profile?.token == null || props.profile?.token == "") {
+            return;
+        }
+        changeBearerToken(props.profile.token);
+    }
+    const onClickEditButton = () => {
+
+    }
+    const onClickDeleteButton = () => {
+        if (props.profile?.token == null || props.profile?.token == "") {
+            return;
+        }
+        deleteProfileWebConfirmation(props.profile.id);
+    }
+
     return (
-        <div class="mb-2 row">
+        <div className="mb-2 row">
             <div className="h2 col-6">{props.profile.name}</div>
             <div className="col-6">
-                <button className="btn btn-success me-1 applyButton" data-token={props.profile.token} title="Apply profile">
+                <button className="btn btn-success me-1 applyButton" data-token={props.profile.token} title="Apply profile" onClick={onClickApplyButton} >
                     <i className="bi bi-check2-circle"></i>
                 </button>
-                <button className="btn btn-warning me-1 editButton" data-id={props.profile.id} title="Edit">
+                <button className="btn btn-warning me-1 editButton" data-id={props.profile.id} title="Edit" onClick={onClickEditButton}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
-                <button className="btn btn-danger deleteButton" data-id={props.profile.id} title="Delete">
+                <button className="btn btn-danger deleteButton" data-id={props.profile.id} title="Delete" onClick={onClickDeleteButton}>
                     <i className="bi bi-trash"></i>
                 </button>
             </div>
@@ -19,4 +37,4 @@ const Profile = (props) => {
     );
 }
 
-export default Profile;
+export default Profile; 

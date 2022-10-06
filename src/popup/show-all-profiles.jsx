@@ -3,23 +3,38 @@ import { Link } from "react-router-dom";
 import jQuery from "jquery";
 import { getAllProfiles } from "../services/SwaggerProfileService";
 import Profile from "./profile.jsx"
+import { deleteProfile } from "../services/SwaggerProfileService.js";
 
 const ShowAllProfiles = () => {
     const [profiles, setProfiles] = useState(null);
+
+    // TODO: what is the best place to use this listener?.
+    const listenForMessageFromBrowserHTML = () => {
+        browser.runtime.onMessage.addListener(messageFromBrowserHTML);
+    }
+    const messageFromBrowserHTML = async (message) => {
+        if (message?.type === "delete") {
+            await deleteProfileConfirmationReceived(message?.data);
+        }
+    }
+
+    const deleteProfileConfirmationReceived = async (profileId) => {
+        if (profileId == null || profileId == "") {
+            return;
+        }
+        await deleteProfile(profileId);
+    }
+
     useEffect(() => {
         getAllProfiles().then((profiles) => {
-            console.log("Profiles", profiles);
             setProfiles(profiles);
-
-            profiles?.map((profile, index) => {
-                <h1>HI {index}</h1>
-                console.log("Name", profile.name);
-
-            });
-
+            if (profiles != null || profiles?.length > 0) {
+                listenForMessageFromBrowserHTML();
+            }
         });
-
     }, []);
+
+
     return (
         <div>
             <div className="container">
