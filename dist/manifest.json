@@ -8,22 +8,12 @@
         "*://*/swagger/index.html",
         "storage"
     ],
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*/swagger/index.html"
-            ],
-            "js": [
-                "index.js"
-            ]
-        }
-    ],
     "browser_action": {
         "default_icon": {
             "32": "icons/popup.png"
         },
         "default_title": "Profile Manager",
-        "default_popup": "popup/popup.html",
+        "default_popup": "popup/index.html",
         "browser_style": true
     }
 }

@@ -33,7 +33,7 @@ module.exports = {
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             template: './src/popup/index.html',
-            filename: 'popup/popup.html'
+            filename: 'popup/index.html'
         }),
         new CopyPlugin({
             patterns: [
