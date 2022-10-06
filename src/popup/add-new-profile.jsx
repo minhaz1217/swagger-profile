@@ -37,7 +37,7 @@ const AddNewProfile = (props) => {
         let profileSaved = false;
         if (id !== null && id !== "") {
             profile.id = id;
-            profileSaved = updateProfile(profile);
+            profileSaved = await updateProfile(profile);
         } else {
             profileSaved = await createProfile(profile);
         }
