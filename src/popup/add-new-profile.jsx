@@ -3,12 +3,12 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom"
 import { createProfile, updateProfile } from "../services/SwaggerProfileService";
 
 const AddNewProfile = (props) => {
-    const [name, setName] = useState("0");
+    const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [nameValidated, setNameValidated] = useState(false);
     const [displayOrder, setDisplayOrder] = useState(0);
     const [displayOrderValidated, setDisplayOrderValidated] = useState(true);
-    const [token, setToken] = useState("0");
+    const [token, setToken] = useState("");
     const [tokenValidated, setTokenValidated] = useState(false);
     const [redirectToShowAllProfile, setRedirectToShowAllProfile] = useState(false);
     const location = useLocation();
@@ -26,6 +26,7 @@ const AddNewProfile = (props) => {
             setId(location.state.profile.id);
             setUpdatedOnce(true);
         }
+        allFieldsValidated();
     });
 
     const saveToken = async () => {
@@ -93,8 +94,17 @@ const AddNewProfile = (props) => {
         }
     }
 
+    const allFieldsValidated = () => {
+        let nameValidated = nameFieldValidation(name);
+        let tokenFieldValidated = tokenFieldValidation(token);
+        let displayOrderValidated = displayOrderFieldValidation(displayOrder);
+        if (nameValidated && tokenFieldValidated && displayOrderValidated) {
+            return true;
+        }
+        return false;
+    }
     const onClickSaveButton = async () => {
-        if (nameFieldValidation(name) && tokenFieldValidation(token) && displayOrderFieldValidation(displayOrder)) {
+        if (allFieldsValidated()) {
             await saveToken();
         }
     }
