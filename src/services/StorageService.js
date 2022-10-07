@@ -15,5 +15,7 @@ export const getStorageData = async (key) => {
     return data;
 }
 
-const printData = (data) => { if (data != null) console.log("Data Received: ", data); }
+const printData = (data) => {
+    //if (data != null) console.log("Data Received: ", data); 
+}
 const printError = (error) => { console.log("Error: ", error); }
