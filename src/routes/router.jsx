@@ -1,7 +1,7 @@
 import React from "react";
 import { createHashRouter } from "react-router-dom";
-import AddNewProfile from "../popup/add-new-profile.jsx";
-import ShowAllProfiles from "../popup/show-all-profiles.jsx";
+import AddNewProfile from "../popup/CreateUpdateProfile.jsx";
+import ShowAllProfiles from "../popup/ShowAllProfiles.jsx";
 
 const Router = createHashRouter([
     {

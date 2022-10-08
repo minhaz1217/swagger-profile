@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import jQuery from "jquery";
 import { getAllProfiles } from "../services/SwaggerProfileService";
-import Profile from "./profile.jsx"
+import Profile from "./Profile.jsx"
 import { deleteProfile } from "../services/SwaggerProfileService.js";
 
 const ShowAllProfiles = () => {
