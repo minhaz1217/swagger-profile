@@ -1,3 +1,4 @@
+var browser = require("webextension-polyfill");
 
 // Execute the code in the browser. In browser the JS code has access to the DOM.
 const executeBrowserScript = (code) => {

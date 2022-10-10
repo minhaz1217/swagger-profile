@@ -4,9 +4,9 @@ import jQuery from "jquery";
 import { getAllProfiles } from "../services/SwaggerProfileService";
 import Profile from "./Profile.jsx"
 import { deleteProfile } from "../services/SwaggerProfileService.js";
-
 const ShowAllProfiles = () => {
     const [profiles, setProfiles] = useState(null);
+    const browser = require("webextension-polyfill");
 
     // TODO: what is the best place to use this listener?.
     const listenForMessageFromBrowserHTML = () => {

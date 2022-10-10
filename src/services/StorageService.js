@@ -1,3 +1,4 @@
+var browser = require("webextension-polyfill");
 // Storage
 export const setStorageData = (data) => {
     browser.storage.local.set(data).then(printData, printError);
