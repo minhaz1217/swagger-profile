@@ -60,7 +60,8 @@ export const deleteProfileWebConfirmation = (profileId) => {
     let getConfirmationForProfileDelete = `
         var choice = confirm("Are you sure? You want to delete this profile?");
         if(choice === true){
-            browser.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
+            // because firefox supports the chrome api, but chrome doesn't support the browser api.
+            chrome.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
         }
     `;
     executeBrowserScript(getConfirmationForProfileDelete);

@@ -10,9 +10,11 @@ const ShowAllProfiles = () => {
 
     // TODO: what is the best place to use this listener?.
     const listenForMessageFromBrowserHTML = () => {
+        console.log("LISTENER ADDED");
         browser.runtime.onMessage.addListener(messageFromBrowserHTML);
     }
     const messageFromBrowserHTML = async (message) => {
+        console.log("MEssage received", message);
         if (message?.type === "delete") {
             await deleteProfileConfirmationReceived(message?.data);
         }
