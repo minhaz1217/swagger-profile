@@ -5,7 +5,6 @@ const executeBrowserScript = (code) => {
     if (code == null || code == "") {
         return;
     }
-
     browser.tabs.executeScript({
         code: code
     }).then(
@@ -20,7 +19,7 @@ const executeBrowserScript = (code) => {
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token) => {
-    const setBearerToken = `    
+    const setBearerToken = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
@@ -47,7 +46,7 @@ export const changeBearerToken = (token) => {
         closeButton.click();
         alert("Token set to: ${token}");
     }, 500);
-    `;
+    }`;
     executeBrowserScript(setBearerToken);
 }
 
@@ -58,11 +57,14 @@ export const deleteProfileWebConfirmation = (profileId) => {
         return;
     }
     let getConfirmationForProfileDelete = `
-        var choice = confirm("Are you sure? You want to delete this profile?");
+    {
+        let choice = confirm("Are you sure? You want to delete this profile?");
+        console.log(choice);
         if(choice === true){
             // because firefox supports the chrome api, but chrome doesn't support the browser api.
             chrome.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
         }
+    }
     `;
     executeBrowserScript(getConfirmationForProfileDelete);
 }

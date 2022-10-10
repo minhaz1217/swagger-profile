@@ -14,7 +14,6 @@ const ShowAllProfiles = () => {
         browser.runtime.onMessage.addListener(messageFromBrowserHTML);
     }
     const messageFromBrowserHTML = async (message) => {
-        console.log("MEssage received", message);
         if (message?.type === "delete") {
             await deleteProfileConfirmationReceived(message?.data);
         }
@@ -24,16 +23,21 @@ const ShowAllProfiles = () => {
         if (profileId == null || profileId == "") {
             return;
         }
-        await deleteProfile(profileId);
+        let profilesDeleted = await deleteProfile(profileId);
+        if (profilesDeleted === true) {
+            getProfiles();
+        }
     }
-
-    useEffect(() => {
+    const getProfiles = () => {
         getAllProfiles().then((profiles) => {
             setProfiles(profiles);
             if (profiles != null || profiles?.length > 0) {
                 listenForMessageFromBrowserHTML();
             }
         });
+    }
+    useEffect(() => {
+        getProfiles();
     }, []);
 
 

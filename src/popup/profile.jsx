@@ -19,9 +19,11 @@ const Profile = (props) => {
         });
     }
     const onClickDeleteButton = () => {
+        console.log("DELETE CLICKED");
         if (props.profile?.token == null || props.profile?.token == "") {
             return;
         }
+        console.log("DELETE CLICKED REACHED");
         deleteProfileWebConfirmation(props.profile.id);
     }
 
