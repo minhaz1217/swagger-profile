@@ -6,41 +6,16 @@ import Profile from "./Profile.jsx"
 import { deleteProfile } from "../services/SwaggerProfileService.js";
 const ShowAllProfiles = () => {
     const [profiles, setProfiles] = useState(null);
-    const browser = require("webextension-polyfill");
 
-    // TODO: what is the best place to use this listener?.
-    const listenForMessageFromBrowserHTML = () => {
-        console.log("LISTENER ADDED");
-        browser.runtime.onMessage.addListener(messageFromBrowserHTML);
-    }
-    const messageFromBrowserHTML = async (message) => {
-        if (message?.type === "delete") {
-            await deleteProfileConfirmationReceived(message?.data);
-        }
-    }
-
-    const deleteProfileConfirmationReceived = async (profileId) => {
-        if (profileId == null || profileId == "") {
-            return;
-        }
-        let profilesDeleted = await deleteProfile(profileId);
-        if (profilesDeleted === true) {
-            getProfiles();
-        }
-    }
     const getProfiles = () => {
         getAllProfiles().then((profiles) => {
             setProfiles(profiles);
-            if (profiles != null || profiles?.length > 0) {
-                listenForMessageFromBrowserHTML();
-            }
         });
     }
+
     useEffect(() => {
         getProfiles();
     }, []);
-
-
     return (
         <div>
             <div className="container">
@@ -50,7 +25,11 @@ const ShowAllProfiles = () => {
                         {profiles == null && "No profiles are present, please add new profile."}
                         {
                             profiles?.map((profile, index) => {
-                                return <Profile profile={profile} key={index}></Profile>
+                                return <Profile
+                                    profile={profile}
+                                    onProfileChangeCallback={getProfiles}
+                                    key={index}
+                                ></Profile>
                             })
                         }
                     </div>
