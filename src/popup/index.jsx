@@ -20,6 +20,8 @@ ReactDOM.createRoot(document.getElementById("react-app")).render(
 // TODO: DONE - rename popup to show all page
 // TODO: add in memory router.
 // TODO: don't use promised based, because of polyfill.
+// TODO: BUG - deleting profile now working in chrome if the developer tool isn't open.
+
 
 // Capabilities (for testing purposes)
 // 1. When clicking extension button for the first time, it will show that there is no profiles

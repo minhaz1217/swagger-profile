@@ -68,3 +68,8 @@ export const deleteProfileWebConfirmation = (profileId) => {
     `;
     executeBrowserScript(getConfirmationForProfileDelete);
 }
+// Shows console log in the client browser.
+export const showInBrowserConsole = (data)=>{
+    let stringData = JSON.stringify(data);
+    executeBrowserScript(`console.log(${stringData})`);
+}
