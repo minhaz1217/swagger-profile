@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {getAllProfiles} from '../services/SwaggerProfileService';
-import IF from '../shared-components/If';
+import IF from '../shared-components/If.jsx';
 import Profile from './Profile.jsx';
 const ShowAllProfiles = () => {
   const [profiles, setProfiles] = useState(null);
@@ -20,7 +20,7 @@ const ShowAllProfiles = () => {
       <div className="container">
         <div className="m-2" style={{width: '20em'}}>
           <h1>
-            All Profiles
+            All Profiles &nbsp;
             <Link
               to="/add-new-profile"
               className="btn btn-success"

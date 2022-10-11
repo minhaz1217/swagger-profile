@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {createProfile, updateProfile} from '../services/SwaggerProfileService';
-import IF from '../shared-components/If';
+import IF from '../shared-components/If.jsx';
 
 const AddNewProfile = (props) => {
   const [name, setName] = useState('');
