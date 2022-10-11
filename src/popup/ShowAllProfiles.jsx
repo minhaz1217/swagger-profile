@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllProfiles } from '../services/SwaggerProfileService';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {getAllProfiles} from '../services/SwaggerProfileService';
 import IF from '../shared-components/If';
 import Profile from './Profile.jsx';
 const ShowAllProfiles = () => {
@@ -18,7 +18,7 @@ const ShowAllProfiles = () => {
   return (
     <div>
       <div className="container">
-        <div className="m-2" style={{ width: '20em' }}>
+        <div className="m-2" style={{width: '20em'}}>
           <h1>All Profiles <Link to="/add-new-profile" className="btn btn-success" title="Add new profile"><i className="bi bi-plus-circle"></i></Link></h1>
           <div id="profiles">
             <IF condition={profiles == null}>
