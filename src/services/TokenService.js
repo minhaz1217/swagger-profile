@@ -1,25 +1,26 @@
-var browser = require("webextension-polyfill");
+const browser = require('webextension-polyfill');
 
-// Execute the code in the browser. In browser the JS code has access to the DOM.
+// Execute the code in the browser.
+// In browser the JS code has access to the DOM.
 const executeBrowserScript = (code) => {
-    if (code == null || code == "") {
-        return;
-    }
-    browser.tabs.executeScript({
-        code: code
-    }).then(
-        executed => {
-            // console.log("Executed: ", executed);
-        },
-        error => {
-            console.log("Error: ", error);
-        }
-    );
-}
+  if (code == null || code == '') {
+    return;
+  }
+  browser.tabs.executeScript({
+    code: code,
+  }).then(
+      (executed) => {
+        // console.log("Executed: ", executed);
+      },
+      (error) => {
+        console.log('Error: ', error);
+      },
+  );
+};
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token) => {
-    const setBearerToken = `{
+  const setBearerToken = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
@@ -47,16 +48,16 @@ export const changeBearerToken = (token) => {
         alert("Token set to: ${token}");
     }, 500);
     }`;
-    executeBrowserScript(setBearerToken);
-}
+  executeBrowserScript(setBearerToken);
+};
 
 
 // Confirms before deleting the profile.
 export const deleteProfileWebConfirmation = (profileId) => {
-    if (profileId == null || profileId == "") {
-        return;
-    }
-    let getConfirmationForProfileDelete = `
+  if (profileId == null || profileId == '') {
+    return;
+  }
+  const getConfirmationForProfileDelete = `
     {
         let choice = confirm("Are you sure? You want to delete this profile?");
         console.log(choice);
@@ -66,10 +67,10 @@ export const deleteProfileWebConfirmation = (profileId) => {
         }
     }
     `;
-    executeBrowserScript(getConfirmationForProfileDelete);
-}
+  executeBrowserScript(getConfirmationForProfileDelete);
+};
 // Shows console log in the client browser.
 export const showInBrowserConsole = (data)=>{
-    let stringData = JSON.stringify(data);
-    executeBrowserScript(`console.log(${stringData})`);
-}
+  const stringData = JSON.stringify(data);
+  executeBrowserScript(`console.log(${stringData})`);
+};
