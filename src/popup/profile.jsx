@@ -31,7 +31,7 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
             return;
         }
         let profilesDeleted = await deleteProfile(profile?.id);
-        setShowConfirm(true);
+        setShowConfirm(false);
         if (profilesDeleted === true) {
             onProfileChangeCallback();
         }
