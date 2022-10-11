@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {createProfile, updateProfile} from '../services/SwaggerProfileService';
+import IF from '../shared-components/If';
 
 const AddNewProfile = (props) => {
   const [name, setName] = useState('');
@@ -110,23 +111,62 @@ const AddNewProfile = (props) => {
 
   return (
     <div className="container m-2" style={{width: '20em'}}>
-      <Link to="/" className="btn btn-primary" title="Show All Profiles"><i className="bi bi-list-ul"></i></Link>
+      <Link to="/" className="btn btn-primary" title="Show All Profiles">
+        <i className="bi bi-list-ul"></i>
+      </Link>
       <h1>Add new profile </h1>
       <form>
         <div>
           <div className="mb-3">
-            <input type="text" className="form-control" id="name" placeholder="Name" value={name} onChange={validateNameField} required />
-            {!nameValidated && <div className="text-danger mt-1">Please enter a name.</div>}
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Name"
+              value={name}
+              onChange={validateNameField}
+              required
+            />
+            <IF condition={!nameValidated}>
+              <div className="text-danger mt-1">Please enter a name.</div>
+            </IF>
           </div>
           <div className="mb-3">
-            <textarea className="form-control" id="token" rows="3" placeholder="Token" value={token} onChange={validateTokenField} required></textarea>
-            {!tokenValidated && <div className="text-danger mt-1">Please enter a token.</div>}
+            <textarea
+              className="form-control"
+              id="token"
+              rows="3"
+              placeholder="Token"
+              value={token}
+              onChange={validateTokenField}
+              required
+            ></textarea>
+            <IF condition={!tokenValidated}>
+              <div className="text-danger mt-1">Please enter a token.</div>
+            </IF>
           </div>
           <div className="mb-3">
-            <input type="number" className="form-control" id="displayOrder" placeholder="Display Order" value={displayOrder} onChange={validateDisplayOrderField} required />
-            {!displayOrderValidated && <div className="text-danger mt-1">Please enter a display order(number).</div>}
+            <input
+              type="number"
+              className="form-control"
+              id="displayOrder"
+              placeholder="Display Order"
+              value={displayOrder}
+              onChange={validateDisplayOrderField}
+              required
+            />
+            <IF condition={!displayOrderValidated}>
+              <div className="text-danger mt-1">
+                Please enter a display order(number).
+              </div>
+            </IF>
           </div>
-          <input type="button" className="btn btn-outline-primary form-control mb-3" value="Save" onClick={onClickSaveButton} />
+          <input
+            type="button"
+            className="btn btn-outline-primary form-control mb-3"
+            value="Save"
+            onClick={onClickSaveButton}
+          />
         </div>
       </form>
     </div>
