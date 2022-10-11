@@ -7,7 +7,10 @@ export const updateProfile = async (newProfile) => {
   }
 
   const data = await getStorageData('profiles');
-  if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
+  if (data == null ||
+      data?.profiles == null ||
+      !Array.isArray(data?.profiles)
+  ) {
     const profiles = [];
     profiles.push(newProfile);
     setStorageData({profiles});
@@ -24,7 +27,10 @@ export const createProfile = async (profile) => {
   Object.assign(profile, {id: generateNewId()});
 
   const data = await getStorageData('profiles');
-  if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
+  if (data == null ||
+      data?.profiles == null ||
+      !Array.isArray(data?.profiles)
+  ) {
     const profiles = [];
     profiles.push(profile);
     setStorageData({profiles});
@@ -43,7 +49,10 @@ export const deleteProfile = async (profileId) => {
 
   const data = await getStorageData('profiles');
   const profiles = [];
-  if (data == null || data?.profiles == null || !Array.isArray(data?.profiles)) {
+  if (data == null ||
+      data?.profiles == null ||
+      !Array.isArray(data?.profiles)
+  ) {
     return false;
   } else {
     for (let i = 0; i < data.profiles.length; i++) {
@@ -59,7 +68,10 @@ export const deleteProfile = async (profileId) => {
 // returns all the profiles sorted by display order.
 export const getAllProfiles = async () => {
   const data = await getStorageData('profiles');
-  if (!(data == null || data?.profiles == null || !Array.isArray(data?.profiles))) {
+  if (!(data == null ||
+      data?.profiles == null ||
+      !Array.isArray(data?.profiles))
+  ) {
     data.profiles.sort((a, b) => {
       return a.displayOrder >= b.displayOrder;
     });
