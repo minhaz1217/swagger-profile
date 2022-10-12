@@ -2,24 +2,24 @@ const browser = require('webextension-polyfill');
 
 // Execute the code in the browser.
 // In browser the JS code has access to the DOM.
-const executeBrowserScript = (code) => {
+const executeBrowserScript = (code: string) => {
   if (code == null || code == '') {
     return;
   }
   browser.tabs.executeScript({
     code: code,
   }).then(
-      (executed) => {
-        // console.log("Executed: ", executed);
-      },
-      (error) => {
-        console.log('Error: ', error);
-      },
+    (executed) => {
+      // console.log("Executed: ", executed);
+    },
+    (error) => {
+      console.log('Error: ', error);
+    },
   );
 };
 
 // Changes the Bearer token by UI.
-export const changeBearerToken = (token) => {
+export const changeBearerToken = (token: string) => {
   const setBearerToken = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
@@ -51,26 +51,8 @@ export const changeBearerToken = (token) => {
   executeBrowserScript(setBearerToken);
 };
 
-
-// Confirms before deleting the profile.
-export const deleteProfileWebConfirmation = (profileId) => {
-  if (profileId == null || profileId == '') {
-    return;
-  }
-  const getConfirmationForProfileDelete = `
-    {
-        let choice = confirm("Are you sure? You want to delete this profile?");
-        console.log(choice);
-        if(choice === true){
-            // because firefox supports the chrome api, but chrome doesn't support the browser api.
-            chrome.runtime.sendMessage({"type": "delete", "data": "${profileId}"});
-        }
-    }
-    `;
-  executeBrowserScript(getConfirmationForProfileDelete);
-};
 // Shows console log in the client browser.
-export const showInBrowserConsole = (data)=>{
+export const showInBrowserConsole = (data: any) => {
   const stringData = JSON.stringify(data);
   executeBrowserScript(`console.log(${stringData})`);
 };

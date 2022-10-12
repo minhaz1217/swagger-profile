@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 
 const Profile = ({ profile, onProfileChangeCallback }) => {
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const history = useHistory();
 
   const onClickApplyButton = () => {
@@ -17,17 +17,15 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
     }
     changeBearerToken(profile.token);
   };
-  
+
   const onClickEditButton = () => {
     history.push("/add-new-profile", {
-      profile: profile,      
+      profile: profile,
     });
   };
   const onClickDeleteButton = async () => {
     setShowConfirm(true);
   };
-
-
   const onConfirmAccept = async () => {
     if (profile?.token == null || profile?.token == '') {
       return;
@@ -41,6 +39,8 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
   const onConfirmReject = () => {
     setShowConfirm(false);
   };
+
+
   return (
     <div>
       <IF condition={!showConfirm}>
@@ -77,14 +77,14 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
   );
 };
 
-Profile.propTypes = {
-  profile: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    token: PropTypes.string.isRequired,
-    displayOrder: PropTypes.string.isRequired,
-  }).isRequired,
-  onProfileChangeCallback: PropTypes.func.isRequired,
-};
+// Profile.propTypes = {
+//   profile: PropTypes.shape({
+//     id: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     token: PropTypes.string.isRequired,
+//     displayOrder: PropTypes.number.isRequired,
+//   }).isRequired,
+//   onProfileChangeCallback: PropTypes.func.isRequired,
+// };
 
 export default Profile;

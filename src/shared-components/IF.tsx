@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 
-const IF = ({children, condition}) => {
-  if (condition) {
+import React, { useState } from 'react';
+
+const IF = ({ children, condition }) => {
+  if (condition === true) {
     return children;
   }
   return null;

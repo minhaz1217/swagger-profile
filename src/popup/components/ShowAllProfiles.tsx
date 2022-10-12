@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllProfiles } from '../../services/SwaggerProfileService';
 import IF from '../../shared-components/IF';
-import Profile from './Profile';
+import { Profile } from '../models/Profile';
+import ProfileComponent from './Profile';
 const ShowAllProfiles = () => {
-  const [profiles, setProfiles] = useState(null);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
 
   const getProfiles = () => {
     getAllProfiles().then((profiles) => {
@@ -34,8 +35,8 @@ const ShowAllProfiles = () => {
               <div>No profiles are present, please add new profile.</div>
             </IF>
             {
-              profiles?.map((profile, index) => {
-                return <Profile
+              profiles?.map((profile: Profile, index: number) => {
+                return <ProfileComponent
                   profile={profile}
                   onProfileChangeCallback={getProfiles}
                   key={index}

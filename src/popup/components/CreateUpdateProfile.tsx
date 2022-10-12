@@ -5,23 +5,27 @@ import IF from '../../shared-components/IF';
 import { Profile } from '../models/Profile';
 
 const AddNewProfile = () => {
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [displayOrder, setDisplayOrder] = useState(0);
-  const [token, setToken] = useState('');
+  const [id, setId] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [displayOrder, setDisplayOrder] = useState<number>(0);
+  const [token, setToken] = useState<string>('');
 
-  const [nameValidated, setNameValidated] = useState(false);
-  const [displayOrderValidated, setDisplayOrderValidated] = useState(true);
-  const [tokenValidated, setTokenValidated] = useState(false);
+  const [nameValidated, setNameValidated] = useState<boolean>(false);
+  const [displayOrderValidated, setDisplayOrderValidated] = useState<boolean>(true);
+  const [tokenValidated, setTokenValidated] = useState<boolean>(false);
 
-  const [updatedOnce, setUpdatedOnce] = useState(false);
+  const [updatedOnce, setUpdatedOnce] = useState<boolean>(false);
 
   const location = useLocation<LocationState>();
   let history = useHistory();
+
+
   interface LocationState {
     pathName: string,
     profile: Profile
   }
+
+  
   useEffect(() => {
     if (location.state?.profile != null && !updatedOnce) {
       console.log(location);
