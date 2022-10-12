@@ -1,18 +1,18 @@
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { deleteProfile } from '../../services/SwaggerProfileService';
-import { changeBearerToken } from '../../services/TokenService';
-import IF from '../../shared-components/IF';
-import { useHistory } from 'react-router-dom';
+import React, {useState} from "react";
+import PropTypes from "prop-types";
+import {deleteProfile} from "../../services/SwaggerProfileService";
+import {changeBearerToken} from "../../services/TokenService";
+import IF from "../../shared-components/IF";
+import {useHistory} from "react-router-dom";
 
 
-const Profile = ({ profile, onProfileChangeCallback }) => {
+const Profile = ({profile, onProfileChangeCallback}) : JSX.Element => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const history = useHistory();
 
   const onClickApplyButton = () => {
-    if (profile?.token == null || profile?.token == '') {
+    if (profile?.token == null || profile?.token == "") {
       return;
     }
     changeBearerToken(profile.token);
@@ -27,7 +27,7 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
     setShowConfirm(true);
   };
   const onConfirmAccept = async () => {
-    if (profile?.token == null || profile?.token == '') {
+    if (profile?.token == null || profile?.token == "") {
       return;
     }
     const profilesDeleted = await deleteProfile(profile?.id);
@@ -77,14 +77,14 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
   );
 };
 
-// Profile.propTypes = {
-//   profile: PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     token: PropTypes.string.isRequired,
-//     displayOrder: PropTypes.number.isRequired,
-//   }).isRequired,
-//   onProfileChangeCallback: PropTypes.func.isRequired,
-// };
+Profile.propTypes = {
+  profile: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+    displayOrder: PropTypes.number.isRequired,
+  }).isRequired,
+  onProfileChangeCallback: PropTypes.func.isRequired,
+};
 
 export default Profile;

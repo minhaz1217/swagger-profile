@@ -1,52 +1,51 @@
-import { Profile } from '../popup/models/Profile';
-import { generateNewId } from './IDGeneratorService';
-import { setStorageData, getStorageData } from './StorageService';
+import {Profile} from "../popup/models/Profile";
+import {setStorageData, getStorageData} from "./StorageService";
 
 export const updateProfile = async (newProfile: Profile): Promise<boolean> => {
-  if (newProfile.id === null || newProfile.id === '') {
+  if (newProfile.id === null || newProfile.id === "") {
     return false;
   }
 
-  const data = await getStorageData('profiles');
+  const data = await getStorageData("profiles");
   if (data == null ||
     data?.profiles == null ||
     !Array.isArray(data?.profiles)
   ) {
     const profiles = [];
     profiles.push(newProfile);
-    setStorageData({ profiles });
+    setStorageData({profiles});
   } else {
     data.profiles = data.profiles.filter((item) => item.id !== newProfile.id);
     data.profiles.push(newProfile);
     const profiles = data.profiles;
-    setStorageData({ profiles });
+    setStorageData({profiles});
   }
   return true;
 };
 
 export const createProfile = async (profile: Profile): Promise<boolean> => {
-  const data = await getStorageData('profiles');
+  const data = await getStorageData("profiles");
   if (data == null ||
     data?.profiles == null ||
     !Array.isArray(data?.profiles)
   ) {
     const profiles = [];
     profiles.push(profile);
-    setStorageData({ profiles });
+    setStorageData({profiles});
   } else {
     data.profiles.push(profile);
     const profiles = data.profiles;
-    setStorageData({ profiles });
+    setStorageData({profiles});
   }
   return true;
 };
 
 export const deleteProfile = async (profileId: string): Promise<boolean> => {
-  if (profileId == null || profileId == '') {
+  if (profileId == null || profileId == "") {
     return false;
   }
 
-  const data = await getStorageData('profiles');
+  const data = await getStorageData("profiles");
   const profiles = [];
   if (data == null ||
     data?.profiles == null ||
@@ -60,13 +59,13 @@ export const deleteProfile = async (profileId: string): Promise<boolean> => {
       }
     }
   }
-  setStorageData({ profiles });
+  setStorageData({profiles});
   return true;
 };
 
 // returns all the profiles sorted by display order.
 export const getAllProfiles = async (): Promise<Profile[]> => {
-  const data = await getStorageData('profiles');
+  const data = await getStorageData("profiles");
   if (!(data == null ||
     data?.profiles == null ||
     !Array.isArray(data?.profiles))

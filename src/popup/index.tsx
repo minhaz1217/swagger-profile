@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { RoutesProvider } from '../routes/router';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {BrowserRouter as Router} from "react-router-dom";
+import {RoutesProvider} from "../routes/router";
 
-ReactDOM.createRoot(document.getElementById('react-app')).render(
+ReactDOM.createRoot(document.getElementById("react-app")).render(
   <Router>
     <RoutesProvider />
-  </Router>
+  </Router>,
 );
 
 // TODO: DONE - make the extension fully functional

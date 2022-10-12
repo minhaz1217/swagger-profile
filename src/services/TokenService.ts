@@ -1,9 +1,9 @@
-const browser = require('webextension-polyfill');
+const browser = require("webextension-polyfill");
 
 // Execute the code in the browser.
 // In browser the JS code has access to the DOM.
-const executeBrowserScript = (code: string) => {
-  if (code == null || code == '') {
+const executeBrowserScript = (code: string) : void => {
+  if (code == null || code == "") {
     return;
   }
   browser.tabs.executeScript({
@@ -13,7 +13,7 @@ const executeBrowserScript = (code: string) => {
       // console.log("Executed: ", executed);
     },
     (error) => {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     },
   );
 };

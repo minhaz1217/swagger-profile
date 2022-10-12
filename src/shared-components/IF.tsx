@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import React, { useState } from 'react';
-
-const IF = ({ children, condition }) => {
+const IF = ({children, condition}) : JSX.Element => {
   if (condition === true) {
     return children;
   }

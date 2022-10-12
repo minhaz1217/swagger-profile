@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import { createProfile, updateProfile } from '../../services/SwaggerProfileService';
-import IF from '../../shared-components/IF';
-import { Profile } from '../models/Profile';
+import React, {useEffect, useState} from "react";
+import {Link, useHistory, useLocation} from "react-router-dom";
+import {createProfile, updateProfile} from "../../services/SwaggerProfileService";
+import IF from "../../shared-components/IF";
+import {Profile} from "../models/Profile";
 
-const AddNewProfile = () => {
-  const [id, setId] = useState<string>('');
-  const [name, setName] = useState<string>('');
+const AddNewProfile = () : React.ReactNode => {
+  const [id, setId] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [displayOrder, setDisplayOrder] = useState<number>(0);
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<string>("");
 
   const [nameValidated, setNameValidated] = useState<boolean>(false);
   const [displayOrderValidated, setDisplayOrderValidated] = useState<boolean>(true);
@@ -17,7 +17,7 @@ const AddNewProfile = () => {
   const [updatedOnce, setUpdatedOnce] = useState<boolean>(false);
 
   const location = useLocation<LocationState>();
-  let history = useHistory();
+  const history = useHistory();
 
 
   interface LocationState {
@@ -25,7 +25,7 @@ const AddNewProfile = () => {
     profile: Profile
   }
 
-  
+
   useEffect(() => {
     if (location.state?.profile != null && !updatedOnce) {
       console.log(location);
@@ -41,7 +41,7 @@ const AddNewProfile = () => {
   const saveToken = async () => {
     const profile = new Profile(name, token, Number(displayOrder));
     let profileSaved = false;
-    if (id !== null && id !== '') {
+    if (id !== null && id !== "") {
       profile.id = id;
       profileSaved = await updateProfile(profile);
     } else {
@@ -59,7 +59,7 @@ const AddNewProfile = () => {
   };
 
   const nameFieldValidation = (value) => {
-    if (value === '' || value === null) {
+    if (value === "" || value === null) {
       setNameValidated(false);
       return false;
     } else {
@@ -74,7 +74,7 @@ const AddNewProfile = () => {
   };
 
   const tokenFieldValidation = (value) => {
-    if (value === '' || value === null) {
+    if (value === "" || value === null) {
       setTokenValidated(false);
       return false;
     } else {
@@ -89,7 +89,7 @@ const AddNewProfile = () => {
   };
 
   const displayOrderFieldValidation = (value) => {
-    if (value === '' || value === null) {
+    if (value === "" || value === null) {
       setDisplayOrderValidated(false);
       return false;
     } else {
@@ -115,7 +115,7 @@ const AddNewProfile = () => {
 
 
   return (
-    <div className="container m-2" style={{ width: '20em' }}>
+    <div className="container m-2" style={{width: "20em"}}>
       <Link to="/" className="btn btn-primary" title="Show All Profiles">
         <i className="bi bi-list-ul"></i>
       </Link>
