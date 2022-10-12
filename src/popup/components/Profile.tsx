@@ -5,6 +5,8 @@ import { deleteProfile } from '../../services/SwaggerProfileService';
 import { changeBearerToken } from '../../services/TokenService';
 import IF from '../../shared-components/IF';
 import { useHistory } from 'react-router-dom';
+
+
 const Profile = ({ profile, onProfileChangeCallback }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const history = useHistory();
@@ -15,17 +17,11 @@ const Profile = ({ profile, onProfileChangeCallback }) => {
     }
     changeBearerToken(profile.token);
   };
+  
   const onClickEditButton = () => {
     history.push("/add-new-profile", {
-      state: {
-        profile: profile,
-      },
+      profile: profile,      
     });
-    // navigate('/add-new-profile', {
-    //   state: {
-    //     profile: profile,
-    //   },
-    // });
   };
   const onClickDeleteButton = async () => {
     setShowConfirm(true);
