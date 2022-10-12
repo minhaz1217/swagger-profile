@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {RouterProvider} from 'react-router-dom';
-import Router from '../routes/router.jsx';
-
+import { BrowserRouter as Router } from 'react-router-dom';
+import { RoutesProvider } from '../routes/router';
 
 ReactDOM.createRoot(document.getElementById('react-app')).render(
-    <React.StrictMode>
-      <RouterProvider router={Router} />
-    </React.StrictMode>,
+  <Router>
+    <RoutesProvider />
+  </Router>
 );
 
 // TODO: DONE - make the extension fully functional
@@ -34,3 +33,4 @@ ReactDOM.createRoot(document.getElementById('react-app')).render(
 // 8. Clicking edit will let the user edit that profile
 // 9. Clicking delete will delete that profile
 // 10. While editing if the user changes the display order it will re-order that profile.
+

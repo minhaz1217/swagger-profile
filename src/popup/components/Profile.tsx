@@ -1,14 +1,13 @@
 
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {deleteProfile} from '../services/SwaggerProfileService.js';
-import {changeBearerToken} from '../services/TokenService.js';
-import IF from '../shared-components/If.jsx';
-const Profile = ({profile, onProfileChangeCallback}) => {
-  const navigate = useNavigate();
+import { deleteProfile } from '../../services/SwaggerProfileService';
+import { changeBearerToken } from '../../services/TokenService';
+import IF from '../../shared-components/IF';
+import { useHistory } from 'react-router-dom';
+const Profile = ({ profile, onProfileChangeCallback }) => {
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const history = useHistory();
 
   const onClickApplyButton = () => {
     if (profile?.token == null || profile?.token == '') {
@@ -17,11 +16,16 @@ const Profile = ({profile, onProfileChangeCallback}) => {
     changeBearerToken(profile.token);
   };
   const onClickEditButton = () => {
-    navigate('/add-new-profile', {
+    history.push("/add-new-profile", {
       state: {
         profile: profile,
       },
     });
+    // navigate('/add-new-profile', {
+    //   state: {
+    //     profile: profile,
+    //   },
+    // });
   };
   const onClickDeleteButton = async () => {
     setShowConfirm(true);

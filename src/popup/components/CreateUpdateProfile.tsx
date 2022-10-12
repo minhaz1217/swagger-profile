@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
-import {createProfile, updateProfile} from '../services/SwaggerProfileService';
-import IF from '../shared-components/If.jsx';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { createProfile, updateProfile } from '../../services/SwaggerProfileService';
+import IF from '../../shared-components/IF';
+import { Profile } from '../models/Profile';
 
-const AddNewProfile = (props) => {
+const AddNewProfile = () => {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [nameValidated, setNameValidated] = useState(false);
@@ -11,10 +12,17 @@ const AddNewProfile = (props) => {
   const [displayOrderValidated, setDisplayOrderValidated] = useState(true);
   const [token, setToken] = useState('');
   const [tokenValidated, setTokenValidated] = useState(false);
-  const location = useLocation();
+  const location = useLocation<LocationState>();
   const [updatedOnce, setUpdatedOnce] = useState(false);
 
-  const navigate = useNavigate();
+  let history = useHistory();
+  interface LocationState {
+    from: {
+      pathname: string;
+    },
+    profile: Profile
+    ;
+  }
 
 
   useEffect(() => {
@@ -30,11 +38,7 @@ const AddNewProfile = (props) => {
   });
 
   const saveToken = async () => {
-    const profile = {
-      name: name,
-      token: token,
-      displayOrder: Number(displayOrder),
-    };
+    const profile = new Profile(name, token, Number(displayOrder));
     let profileSaved = false;
     if (id !== null && id !== '') {
       profile.id = id;
@@ -44,7 +48,7 @@ const AddNewProfile = (props) => {
     }
 
     if (profileSaved) {
-      navigate('/');
+      history.push("/");
     }
   };
 
@@ -110,7 +114,7 @@ const AddNewProfile = (props) => {
 
 
   return (
-    <div className="container m-2" style={{width: '20em'}}>
+    <div className="container m-2" style={{ width: '20em' }}>
       <Link to="/" className="btn btn-primary" title="Show All Profiles">
         <i className="bi bi-list-ul"></i>
       </Link>
@@ -135,7 +139,6 @@ const AddNewProfile = (props) => {
             <textarea
               className="form-control"
               id="token"
-              rows="3"
               placeholder="Token"
               value={token}
               onChange={validateTokenField}

@@ -6,11 +6,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     entry: {
-        popup: './src/popup/index.jsx'
+        popup: './src/popup/index.tsx'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.[name].js'
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     module: {
         rules: [
@@ -27,7 +30,12 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
-            }]
+            },
+            {
+                test: /\.(ts|tsx)?$/,
+                loader: 'ts-loader'
+            },
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin(),

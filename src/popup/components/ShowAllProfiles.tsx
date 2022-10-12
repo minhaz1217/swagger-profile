@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import {getAllProfiles} from '../services/SwaggerProfileService';
-import IF from '../shared-components/If.jsx';
-import Profile from './Profile.jsx';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getAllProfiles } from '../../services/SwaggerProfileService';
+import IF from '../../shared-components/IF';
+import Profile from './Profile';
 const ShowAllProfiles = () => {
   const [profiles, setProfiles] = useState(null);
 
@@ -18,7 +18,7 @@ const ShowAllProfiles = () => {
   return (
     <div>
       <div className="container">
-        <div className="m-2" style={{width: '20em'}}>
+        <div className="m-2" style={{ width: '20em' }}>
           <h1>
             All Profiles &nbsp;
             <Link
