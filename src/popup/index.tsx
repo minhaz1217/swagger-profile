@@ -9,18 +9,18 @@ ReactDOM.createRoot(document.getElementById("react-app")).render(
   </Router>,
 );
 
-// TODO: DONE - make the extension fully functional
 // TODO: in successful save, show success message and the go back to previous screen.
-// TODO: DONE - on submit and successful save, redirect to show all page.
+// TODO: save button should be seen disabled unless validation passes.
 // TODO: add css minifier for bootstrap to only use css that we used in our files, just like tailwind
-// TODO: use jslint
 // TODO: add tailwind support
-// TODO: add typescript support
-// TODO: DONE - rename popup to show all page
 // TODO: add in memory router.
 // TODO: don't use promised based, because of polyfill.
+// TODO: DONE - make the extension fully functional
+// TODO: DONE - on submit and successful save, redirect to show all page.
+// TODO: DONE - use jslint
+// TODO: DONE - add typescript support
+// TODO: DONE - rename popup to show all page
 // TODO: DONE - BUG - deleting profile now working in chrome if the developer tool isn't open.
-
 
 // Capabilities (for testing purposes)
 // 1. When clicking extension button for the first time, it will show that there is no profiles
