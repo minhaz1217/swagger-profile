@@ -1,13 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {BrowserRouter as Router} from "react-router-dom";
-import {RoutesProvider} from "../routes/router";
+import { BrowserRouter as Router } from "react-router-dom";
+import { RoutesProvider } from "../routes/router";
 
+export const App = () => {
+  return (
+    <Router>
+      <RoutesProvider />
+    </Router>
+  );
+}
 ReactDOM.createRoot(document.getElementById("react-app")).render(
-  <Router>
-    <RoutesProvider />
-  </Router>,
+  <App />
 );
+
 
 // TODO: in successful save, show success message and the go back to previous screen.
 // TODO: save button should be seen disabled unless validation passes.

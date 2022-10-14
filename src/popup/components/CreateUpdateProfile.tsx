@@ -4,7 +4,7 @@ import {createProfile, updateProfile} from "../../services/SwaggerProfileService
 import IF from "../../shared-components/IF";
 import {Profile} from "../models/Profile";
 
-const AddNewProfile = () : React.ReactNode => {
+const AddNewProfile = () : JSX.Element => {
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [displayOrder, setDisplayOrder] = useState<number>(0);

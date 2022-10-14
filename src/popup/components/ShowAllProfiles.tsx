@@ -31,7 +31,7 @@ const ShowAllProfiles = (): JSX.Element => {
             </Link>
           </h1>
           <div id="profiles">
-            <IF condition={profiles == null}>
+            <IF condition={profiles == null || profiles.length == 0}>
               <div>No profiles are present, please add new profile.</div>
             </IF>
             {
