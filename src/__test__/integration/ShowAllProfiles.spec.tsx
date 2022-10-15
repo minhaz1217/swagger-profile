@@ -10,12 +10,10 @@ import { Profile } from '../../popup/models/Profile';
 
 
 jest.mock("webextension-polyfill", () => {
-    console.log("CALLED");
     return;
 });
 
 jest.mock("../../services/SwaggerProfileService", () => {
-    console.log("Called getStorageData");
     return {
         getAllProfiles:
             jest
