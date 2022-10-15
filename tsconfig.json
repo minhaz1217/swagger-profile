@@ -4,5 +4,6 @@
         "jsx": "react",
         "target": "ES6",
         "esModuleInterop": true,
+        "moduleResolution": "node",
     }
 }

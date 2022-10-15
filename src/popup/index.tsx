@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
-import { RoutesProvider } from "../routes/router";
+import {BrowserRouter as Router} from "react-router-dom";
+import {RoutesProvider} from "../routes/router";
 
 export const App = () => {
   return (
@@ -9,9 +9,9 @@ export const App = () => {
       <RoutesProvider />
     </Router>
   );
-}
+};
 ReactDOM.createRoot(document.getElementById("react-app")).render(
-  <App />
+  <App />,
 );
 
 
