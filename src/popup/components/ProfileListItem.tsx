@@ -5,9 +5,14 @@ import {deleteProfile} from "../../services/SwaggerProfileService";
 import {changeBearerToken} from "../../services/TokenService";
 import IF from "../../shared-components/IF";
 import {useHistory} from "react-router-dom";
+import {Profile} from "../models/Profile";
 
+export interface ProfileListItemProps {
+  profile: Profile,
+  onProfileChangeCallback: Function
+}
 
-const Profile = ({profile, onProfileChangeCallback}) : JSX.Element => {
+const ProfileListItem: React.FC<ProfileListItemProps> = ({profile, onProfileChangeCallback}): JSX.Element => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const history = useHistory();
 
@@ -77,14 +82,4 @@ const Profile = ({profile, onProfileChangeCallback}) : JSX.Element => {
   );
 };
 
-Profile.propTypes = {
-  profile: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    token: PropTypes.string.isRequired,
-    displayOrder: PropTypes.number.isRequired,
-  }).isRequired,
-  onProfileChangeCallback: PropTypes.func.isRequired,
-};
-
-export default Profile;
+export default ProfileListItem;
