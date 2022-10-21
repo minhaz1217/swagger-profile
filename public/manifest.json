@@ -2,6 +2,11 @@
     "manifest_version": 2,
     "name": "swagger-profile",
     "version": "1.0.0",
+    "author": "Minhazul Hayat Khan (minhaz1217@github)",
+    "developer": {
+        "name": "Minhazul Hayat Khan",
+        "url": "https://minhazul.com"
+    },
     "description": "An extension to create and use swagger authorizations tokens.",
     "permissions": [
         "activeTab",
