@@ -1,6 +1,5 @@
 
 import React, {useState} from "react";
-import PropTypes from "prop-types";
 import {deleteProfile} from "../../services/SwaggerProfileService";
 import {changeBearerToken} from "../../services/TokenService";
 import IF from "../../shared-components/IF";
