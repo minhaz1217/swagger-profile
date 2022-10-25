@@ -5,7 +5,7 @@
 import {render, RenderResult} from "@testing-library/react";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
-import ProfileComponent from "../../popup/components/ProfileListItem";
+import ProfileListItem from "../../popup/components/ProfileListItem";
 import {Profile} from "../../popup/models/Profile";
 jest.mock("webextension-polyfill", () => {
   return;
@@ -15,7 +15,7 @@ describe("Profile component rendered correctly.", () => {
   let documentBody: RenderResult;
   const app =
         <BrowserRouter>
-          <ProfileComponent
+          <ProfileListItem
             onProfileChangeCallback={() => { }}
             profile={new Profile("Profile Name 1", "Profile Token 2", 0)}
           />
