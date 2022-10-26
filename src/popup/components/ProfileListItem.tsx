@@ -19,7 +19,7 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({profile, onProfileChan
     if (profile?.token == null || profile?.token == "") {
       return;
     }
-    changeBearerToken(profile.token);
+    changeBearerToken(profile.token, profile.name);
   };
 
   const onClickEditButton = () => {

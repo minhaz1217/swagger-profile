@@ -2,7 +2,7 @@ const browser = require("webextension-polyfill");
 
 // Execute the code in the browser.
 // In browser the JS code has access to the DOM.
-const executeBrowserScript = (code: string) : void => {
+const executeBrowserScript = (code: string): void => {
   if (code == null || code == "") {
     return;
   }
@@ -19,7 +19,10 @@ const executeBrowserScript = (code: string) : void => {
 };
 
 // Changes the Bearer token by UI.
-export const changeBearerToken = (token: string) => {
+export const changeBearerToken = (token: string, name?: string) => {
+
+  let alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
+  console.log(alertMessage);
   const setBearerToken = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
@@ -45,7 +48,7 @@ export const changeBearerToken = (token: string) => {
         tokenInput.dispatchEvent(inputEvent);
         authButton.click();
         closeButton.click();
-        alert("Token set to: ${token}");
+        alert(${alertMessage});
     }, 500);
     }`;
   executeBrowserScript(setBearerToken);
