@@ -49,7 +49,7 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({profile, onProfileChan
     <div>
       <IF condition={!showConfirm}>
         <div className="mb-2 row">
-          <div className="h2 col-6">{profile.name}</div>
+          <div className="h2 col-6 text-break">{profile.name}</div>
           <div className="col-6">
             <button className="btn btn-success me-1 applyButton" data-token={profile.token} title="Apply profile" onClick={onClickApplyButton} >
               <i className="bi bi-check2-circle"></i>
