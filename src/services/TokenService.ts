@@ -20,8 +20,7 @@ const executeBrowserScript = (code: string): void => {
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token: string, name?: string) => {
-
-  let alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
+  const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
   console.log(alertMessage);
   const setBearerToken = `{
     // Open the form
