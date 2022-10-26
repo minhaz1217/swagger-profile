@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "cd dist & web-ext run",
-    "build": "webpack --config webpack.prod.js",
+    "build": "cd dist & web-ext build",
+    "webpack-build": "webpack --config webpack.prod.js",
     "webpack-dev": "webpack --watch --config webpack.dev.js",
     "start-swagger": "dotnet run --project SwaggerUIAppForTesting/SwaggerUIAppForTesting",
     "lint": "npx eslint \"src/**\"",
