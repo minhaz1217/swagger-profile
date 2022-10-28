@@ -1,12 +1,7 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "Swagger Profile Manager",
     "version": "1.0.0",
-    "author": "Minhazul Hayat Khan (https://www.minhazul.com)",
-    "developer": {
-        "name": "Minhazul Hayat Khan",
-        "url": "https://github.com/minhaz1217/swagger-profile"
-    },
     "description": "An extension to create and manage swagger authorizations tokens. That applies bearer token on a single click.",
     "icons": {
         "16": "icons/icon-16.png",
@@ -19,9 +14,6 @@
     "permissions": [
         "activeTab",
         "storage"
-    ],
-    "host_permissions": [
-        "*://*/swagger/index.html"
     ],
     "browser_action": {
         "default_icon": {
