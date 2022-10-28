@@ -8,7 +8,7 @@ module.exports = {
         popup: './src/popup/index.tsx'
     },
     output: {
-        path: path.resolve(__dirname, '../dist/manifest-v2'),
+        path: path.resolve(__dirname, '../dist/manifest-v3'),
         filename: 'bundle.[name].js'
     },
     resolve: {
@@ -48,7 +48,9 @@ module.exports = {
                     from: "public",
                     filter: async (resourcePath) => {
                         if (resourcePath.includes("manifest-v2.json") ||
-                            resourcePath.includes("manifest-common.json")) {
+                            resourcePath.includes("manifest-v3.json") ||
+                            resourcePath.includes("manifest-common.json")
+                        ) {
                             return false;
                         }
                         return true;
@@ -58,7 +60,7 @@ module.exports = {
         }),
 
         new MergeJsonWebpackPlugin({
-            files: ["public/manifest-common.json", "public/manifest-v2.json"],
+            files: ["public/manifest-common.json", "public/manifest-v3.json"],
             output: {
                 fileName: "manifest.json",
             },

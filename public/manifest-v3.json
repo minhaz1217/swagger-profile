@@ -1,10 +1,10 @@
 {
-    "manifest_version": 2,
-    "developer": {
-        "name": "Minhazul Hayat Khan",
-        "url": "https://github.com/minhaz1217/swagger-profile"
-    },
-    "browser_action": {
+    "manifest_version": 3,
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "action": {
+        "name": "Swagger Profile Manager",
         "default_icon": {
             "16": "icons/icon-16.png",
             "32": "icons/icon-32.png",
@@ -16,5 +16,7 @@
         "default_title": "Swagger Profile Manager",
         "default_popup": "popup/index.html",
         "browser_style": true
-    }
+    },
+    "permissions": ["scripting"] 
+
 }

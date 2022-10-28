@@ -1,5 +1,4 @@
 {
-    "manifest_version": 2,
     "name": "Swagger Profile Manager",
     "version": "1.0.0",
     "description": "An extension to create and manage swagger authorizations tokens. That applies bearer token on a single click.",
@@ -14,18 +13,5 @@
     "permissions": [
         "activeTab",
         "storage"
-    ],
-    "browser_action": {
-        "default_icon": {
-            "16": "icons/icon-16.png",
-            "32": "icons/icon-32.png",
-            "48": "icons/icon-48.png",
-            "128": "icons/icon-128.png",
-            "256": "icons/icon-256.png",
-            "512": "icons/icon-16.png"
-        },
-        "default_title": "Swagger Profile Manager",
-        "default_popup": "popup/index.html",
-        "browser_style": true
-    }
+    ]
 }
