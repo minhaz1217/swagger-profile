@@ -33,7 +33,7 @@ const executeBrowserScriptForFirefox = (code: string): void => {
 
 const executeBrowserScriptForChrome = async (func: Function, args: any) => {
   const getCurrentTab = async () => {
-    const queryOptions = {active: true, currentWindow: true};
+    const queryOptions = { active: true, currentWindow: true };
     const [tab] = await chrome.tabs.query(queryOptions);
     return tab;
   };
@@ -41,7 +41,7 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 
   const tab = await getCurrentTab();
   await chrome.scripting.executeScript({
-    target: {tabId: tab.id, allFrames: true},
+    target: { tabId: tab.id, allFrames: true },
     func: func as any,
     args: args,
   });
@@ -50,7 +50,7 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token: string, name?: string) => {
-  const alertMessage = `"Profile ${name} is set.\\naApplied token: ${token}"`;
+  const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
   const setBearerTokenFunctionString = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
@@ -60,13 +60,13 @@ export const changeBearerToken = (token: string, name?: string) => {
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.unlocked");
         openAuthFormButton.click();
     }
-    
     setTimeout(function() {
         // if logout button is showing we at first click on it, then we paste the token.
-        let authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
+        let authButtons = document.getElementsByClassName("auth");
+        console.log(authButtons);
         for (let i = 0; i < authButtons.length; i++) {
           if (authButtons[i].innerHTML === "Logout") {
-            (authButtons[i] as HTMLElement).click();
+            authButtons[i].click();
           }
         }
   
@@ -95,7 +95,7 @@ export const changeBearerToken = (token: string, name?: string) => {
       openAuthFormButton.click();
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       // if logout button is showing we at first click on it, then we paste the token.
       const authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
       for (let i = 0; i < authButtons.length; i++) {
@@ -110,7 +110,7 @@ export const changeBearerToken = (token: string, name?: string) => {
       const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
       nativeInputValueSetter.call(tokenInput, token);
 
-      const inputEvent = new Event("input", {bubbles: true});
+      const inputEvent = new Event("input", { bubbles: true });
       tokenInput.dispatchEvent(inputEvent);
       authButton.click();
       closeButton.click();
