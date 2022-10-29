@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("react-app")).render(
 );
 
 
-// TODO: in successful save, show success message and the go back to previous screen.
+// TODO: DONE - in successful save, show success message and the go back to previous screen.
 // TODO: save button should be seen disabled unless validation passes.
 // TODO: add css minifier for bootstrap to only use css that we used in our files, just like tailwind
 // TODO: add tailwind support
