@@ -1,11 +1,34 @@
+
 const browser = require("webextension-polyfill");
+
+// declare global{
+//   interface Chrome{
+//     tabs: any
+//   }
+// }
+async function getCurrentTab() {
+  let queryOptions = { active: true, currentWindow: true };
+  let [tab] = await chrome.tabs.query(queryOptions);
+  // console.log(tabs);
+  return tab;
+}
+
 
 // Execute the code in the browser.
 // In browser the JS code has access to the DOM.
-const executeBrowserScript = (code: string): void => {
+const executeBrowserScript = async (code: string): Promise<void> => {
   if (code == null || code == "") {
     return;
   }
+
+  const tab = await getCurrentTab();
+  console.log(tab);
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id, allFrames: true },
+    func: () => {
+      new Function("console.log('SCRIPT EXECUTED');");
+    }
+  });
   browser.tabs.executeScript({
     code: code,
   }).then(
