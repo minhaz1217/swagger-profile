@@ -37,7 +37,7 @@ const executeBrowserScriptForFirefox = (code: string): void => {
   );
 };
 
-const executeBrowserScriptForChrome = async (func?: Function) => {
+const executeBrowserScriptForChrome = async (func: Function, args: any) => {
   // if (func == null) {
   //   return;
   // }
@@ -52,37 +52,8 @@ const executeBrowserScriptForChrome = async (func?: Function) => {
   const tab = await getCurrentTab();
   chrome.scripting.executeScript({
     target: { tabId: tab.id, allFrames: true },
-    func: () => {
-      let alertMessage = "Hi";
-      let token = "HI2";
-      console.log("Token: ", alertMessage);
-      // Open the form
-      if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
-        let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
-        openAuthFormButton.click();
-      } else if (document.querySelector(".auth-wrapper .authorize.unlocked") !== null) {
-        let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.unlocked");
-        openAuthFormButton.click();
-      }
-
-      setTimeout(function () {
-        // if logout button is showing we at first click on it, then we paste the token.
-        if (document.getElementsByClassName("auth authorize")[0] === undefined) {
-          (document.getElementsByClassName("auth")[0] as HTMLElement).click();
-        }
-        var tokenInput = document.querySelector(".auth-container input");
-        var authButton: HTMLElement = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
-        var closeButton: HTMLElement = document.querySelector("button.btn-done");
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(tokenInput, "${token}");
-
-        var inputEvent = new Event('input', { bubbles: true });
-        tokenInput.dispatchEvent(inputEvent);
-        authButton.click();
-        closeButton.click();
-        alert(alertMessage);
-      }, 500);
-    }
+    func: func,
+    args: args
   });
 }
 
@@ -149,12 +120,12 @@ export const changeBearerToken = (token: string, name?: string) => {
         alert(${alertMessage});
     }, 500);
     }`;
-
-
-
   let browser = detectBrowser();
   if (browser == Browser.Chromium) {
-    executeBrowserScriptForChrome(setBearerTokenFunc);
+    let val = "Hello World"; 
+    executeBrowserScriptForChrome((val : string) => {
+      console.log(val.toString());
+    }, [val]);
   } else {
     executeBrowserScriptForFirefox(setBearerToken);
   }
