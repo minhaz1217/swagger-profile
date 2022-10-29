@@ -27,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("react-app")).render(
 // TODO: DONE - add typescript support
 // TODO: DONE - rename popup to show all page
 // TODO: DONE - BUG - deleting profile now working in chrome if the developer tool isn't open.
+// TODO: safety - Show alert message when apply button is clicked on anywhere except the Swagger UI Page.
 
 // Capabilities (for testing purposes)
 // 1. When clicking extension button for the first time, it will show that there is no profiles
