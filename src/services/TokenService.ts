@@ -44,7 +44,6 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
   const getCurrentTab = async () => {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
-    // console.log(tabs);
     return tab;
   }
 
@@ -58,41 +57,12 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 }
 
 
-export function setBearerTokenFunc(token?: string, alertMessage?: string) {
-  console.log("Token: ", alertMessage);
-  // Open the form
-  if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
-    let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
-    openAuthFormButton.click();
-  } else if (document.querySelector(".auth-wrapper .authorize.unlocked") !== null) {
-    let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.unlocked");
-    openAuthFormButton.click();
-  }
 
-  setTimeout(function () {
-    // if logout button is showing we at first click on it, then we paste the token.
-    if (document.getElementsByClassName("auth authorize")[0] === undefined) {
-      (document.getElementsByClassName("auth")[0] as HTMLElement).click();
-    }
-    var tokenInput = document.querySelector(".auth-container input");
-    var authButton: HTMLElement = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
-    var closeButton: HTMLElement = document.querySelector("button.btn-done");
-    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-    nativeInputValueSetter.call(tokenInput, "${token}");
-
-    var inputEvent = new Event('input', { bubbles: true });
-    tokenInput.dispatchEvent(inputEvent);
-    authButton.click();
-    closeButton.click();
-    alert(alertMessage);
-  }, 500);
-}
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token: string, name?: string) => {
   const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
-  console.log(alertMessage);
-  const setBearerToken = `{
+  const setBearerTokenFunctionString = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
         let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
@@ -104,9 +74,13 @@ export const changeBearerToken = (token: string, name?: string) => {
     
     setTimeout(function() {
         // if logout button is showing we at first click on it, then we paste the token.
-        if(document.getElementsByClassName("auth authorize")[0] === undefined){
-            document.getElementsByClassName("auth")[0].click();
+        let authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
+        for (let i = 0; i < authButtons.length; i++) {
+          if (authButtons[i].innerHTML === "Logout") {
+            (authButtons[i] as HTMLElement).click();
+          }
         }
+  
         var tokenInput = document.querySelector(".auth-container input");
         var authButton = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
         var closeButton = document.querySelector("button.btn-done");
@@ -120,14 +94,45 @@ export const changeBearerToken = (token: string, name?: string) => {
         alert(${alertMessage});
     }, 500);
     }`;
+
+  const setBearerTokenFunction = (token: string, name: string) => {
+    const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
+    // Open the form
+    if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
+      let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
+      openAuthFormButton.click();
+    } else if (document.querySelector(".auth-wrapper .authorize.unlocked") !== null) {
+      let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.unlocked");
+      openAuthFormButton.click();
+    }
+
+    setTimeout(function () {
+      // if logout button is showing we at first click on it, then we paste the token.
+      let authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
+      for (let i = 0; i < authButtons.length; i++) {
+        if (authButtons[i].innerHTML === "Logout") {
+          (authButtons[i] as HTMLElement).click();
+        }
+      }
+
+      var tokenInput = document.querySelector(".auth-container input");
+      var authButton: HTMLElement = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
+      var closeButton: HTMLElement = document.querySelector("button.btn-done");
+      var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+      nativeInputValueSetter.call(tokenInput, token);
+
+      var inputEvent = new Event('input', { bubbles: true });
+      tokenInput.dispatchEvent(inputEvent);
+      authButton.click();
+      closeButton.click();
+      alert(alertMessage);
+    }, 500);
+  }
   let browser = detectBrowser();
   if (browser == Browser.Chromium) {
-    let val = "Hello World"; 
-    executeBrowserScriptForChrome((val : string) => {
-      console.log(val.toString());
-    }, [val]);
+    executeBrowserScriptForChrome(setBearerTokenFunction, [token, name]);
   } else {
-    executeBrowserScriptForFirefox(setBearerToken);
+    executeBrowserScriptForFirefox(setBearerTokenFunctionString);
   }
 };
 
