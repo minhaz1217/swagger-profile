@@ -38,9 +38,6 @@ const executeBrowserScriptForFirefox = (code: string): void => {
 };
 
 const executeBrowserScriptForChrome = async (func: Function, args: any) => {
-  // if (func == null) {
-  //   return;
-  // }
   const getCurrentTab = async () => {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
@@ -49,9 +46,9 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 
 
   const tab = await getCurrentTab();
-  chrome.scripting.executeScript({
+  await chrome.scripting.executeScript({
     target: { tabId: tab.id, allFrames: true },
-    func: func,
+    func: func as any,
     args: args
   });
 }
@@ -61,7 +58,7 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token: string, name?: string) => {
-  const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
+  const alertMessage = `"Profile ${name} is set.\\naApplied token: ${token}"`; 
   const setBearerTokenFunctionString = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
@@ -96,7 +93,7 @@ export const changeBearerToken = (token: string, name?: string) => {
     }`;
 
   const setBearerTokenFunction = (token: string, name: string) => {
-    const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
+    const alertMessage = `"Profile ${name} is set.\nApplied token: ${token}"`;
     // Open the form
     if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
       let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
