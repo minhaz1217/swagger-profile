@@ -29,6 +29,8 @@
         ],
         // "no-console": "error",
         "no-empty": "warn",
-        "max-len": "warn"
+        "max-len": "warn",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error"
     }
 }

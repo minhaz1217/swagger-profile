@@ -1,11 +1,5 @@
-
 const browser = require("webextension-polyfill");
 
-// declare global{
-//   interface Chrome{
-//     tabs: any
-//   }
-// }
 enum Browser {
   Chromium,
   Firefox
@@ -16,7 +10,7 @@ const detectBrowser = () => {
   } else {
     return Browser.Firefox;
   }
-}
+};
 
 
 // Execute the code in the browser.
@@ -39,26 +33,24 @@ const executeBrowserScriptForFirefox = (code: string): void => {
 
 const executeBrowserScriptForChrome = async (func: Function, args: any) => {
   const getCurrentTab = async () => {
-    let queryOptions = { active: true, currentWindow: true };
-    let [tab] = await chrome.tabs.query(queryOptions);
+    const queryOptions = {active: true, currentWindow: true};
+    const [tab] = await chrome.tabs.query(queryOptions);
     return tab;
-  }
+  };
 
 
   const tab = await getCurrentTab();
   await chrome.scripting.executeScript({
-    target: { tabId: tab.id, allFrames: true },
+    target: {tabId: tab.id, allFrames: true},
     func: func as any,
-    args: args
+    args: args,
   });
-}
-
-
+};
 
 
 // Changes the Bearer token by UI.
 export const changeBearerToken = (token: string, name?: string) => {
-  const alertMessage = `"Profile ${name} is set.\\naApplied token: ${token}"`; 
+  const alertMessage = `"Profile ${name} is set.\\naApplied token: ${token}"`;
   const setBearerTokenFunctionString = `{
     // Open the form
     if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
@@ -96,37 +88,37 @@ export const changeBearerToken = (token: string, name?: string) => {
     const alertMessage = `"Profile ${name} is set.\nApplied token: ${token}"`;
     // Open the form
     if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
-      let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
+      const openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
       openAuthFormButton.click();
     } else if (document.querySelector(".auth-wrapper .authorize.unlocked") !== null) {
-      let openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.unlocked");
+      const openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.unlocked");
       openAuthFormButton.click();
     }
 
-    setTimeout(function () {
+    setTimeout(function() {
       // if logout button is showing we at first click on it, then we paste the token.
-      let authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
+      const authButtons: HTMLCollectionOf<Element> = document.getElementsByClassName("auth");
       for (let i = 0; i < authButtons.length; i++) {
         if (authButtons[i].innerHTML === "Logout") {
           (authButtons[i] as HTMLElement).click();
         }
       }
 
-      var tokenInput = document.querySelector(".auth-container input");
-      var authButton: HTMLElement = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
-      var closeButton: HTMLElement = document.querySelector("button.btn-done");
-      var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+      const tokenInput = document.querySelector(".auth-container input");
+      const authButton: HTMLElement = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
+      const closeButton: HTMLElement = document.querySelector("button.btn-done");
+      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
       nativeInputValueSetter.call(tokenInput, token);
 
-      var inputEvent = new Event('input', { bubbles: true });
+      const inputEvent = new Event("input", {bubbles: true});
       tokenInput.dispatchEvent(inputEvent);
       authButton.click();
       closeButton.click();
       alert(alertMessage);
     }, 500);
-  }
-  let browser = detectBrowser();
-  if (browser == Browser.Chromium) {
+  };
+  const browser = detectBrowser();
+  if (browser === Browser.Chromium) {
     executeBrowserScriptForChrome(setBearerTokenFunction, [token, name]);
   } else {
     executeBrowserScriptForFirefox(setBearerTokenFunctionString);
