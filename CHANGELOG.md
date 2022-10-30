@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file
 ## [Unreleased] - yyyy-mm-dd
 - Ability to copy token.
 - Delete button inside the edit page.
+- Set max height in show all page.
 
 
 ## [1.1.0] - 2022-10-29
