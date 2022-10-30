@@ -70,7 +70,7 @@ export const getAllProfiles = async (): Promise<Profile[]> => {
     data?.profiles == null ||
     !Array.isArray(data?.profiles))
   ) {
-    data.profiles.sort((a, b) => {
+    data.profiles.sort((a: Profile, b: Profile): boolean => {
       return a.displayOrder >= b.displayOrder;
     });
     return data.profiles;
