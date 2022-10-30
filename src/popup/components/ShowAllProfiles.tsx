@@ -38,7 +38,6 @@ const ShowAllProfiles = (): JSX.Element => {
               profiles?.map((profile: Profile, index: number) => {
                 return <ProfileComponent
                   profile={profile}
-                  onProfileChangeCallback={getProfiles}
                   key={index}
                 />;
               })

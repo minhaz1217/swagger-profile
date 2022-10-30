@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Link, useHistory, useLocation} from "react-router-dom";
-import {createProfile, updateProfile} from "../../services/SwaggerProfileService";
+import {createProfile, deleteProfile, updateProfile} from "../../services/SwaggerProfileService";
 import IF from "../../shared-components/IF";
 import {Profile} from "../models/Profile";
 
-const AddNewProfile = () : JSX.Element => {
+const AddNewProfile = (): JSX.Element => {
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [displayOrder, setDisplayOrder] = useState<number>(0);
@@ -15,6 +15,7 @@ const AddNewProfile = () : JSX.Element => {
   const [tokenValidated, setTokenValidated] = useState<boolean>(false);
 
   const [updatedOnce, setUpdatedOnce] = useState<boolean>(false);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
   const location = useLocation<LocationState>();
   const history = useHistory();
@@ -49,8 +50,11 @@ const AddNewProfile = () : JSX.Element => {
     }
 
     if (profileSaved) {
-      history.push("/");
+      goToShowAllPage();
     }
+  };
+  const goToShowAllPage = () => {
+    history.push("/");
   };
 
   const validateNameField = (e) => {
@@ -113,12 +117,56 @@ const AddNewProfile = () : JSX.Element => {
     }
   };
 
+  const onClickDeleteButton = async () => {
+    setShowConfirm(true);
+  };
+
+
+  const onConfirmAccept = async () => {
+    if (id == null || id == "") {
+      return;
+    }
+    const profilesDeleted = await deleteProfile(id);
+    setShowConfirm(false);
+    if (profilesDeleted === true) {
+      goToShowAllPage();
+    }
+  };
+  const onConfirmReject = () => {
+    setShowConfirm(false);
+  };
 
   return (
     <div className="container m-2" style={{width: "20em"}}>
-      <Link to="/" className="btn btn-primary" title="Show All Profiles">
-        <i className="bi bi-list-ul"></i>
-      </Link>
+
+      <div className="row m-0">
+
+        <Link to="/" className="btn btn-primary col-auto me-auto" title="Show All Profiles">
+          <i className="bi bi-list-ul"></i>
+        </Link>
+        <div className="col-auto">
+          <IF condition={!showConfirm && updatedOnce}>
+            <button className="btn btn-danger col-auto" title="Delete" onClick={onClickDeleteButton}>
+              <i className="bi bi-trash"></i>
+            </button>
+          </IF>
+
+          <IF condition={showConfirm}>
+            <div className="row">
+              <div className="h2 col-6">Confirm?</div>
+              <div className="col-6">
+                <button className="btn btn-success me-1" title="Yes" onClick={onConfirmAccept} >
+                  <i className="bi bi-check-lg"></i>
+                </button>
+                <button className="btn btn-danger" title="No" onClick={onConfirmReject}>
+                  <i className="bi bi-x-lg"></i>
+                </button>
+              </div>
+            </div>
+          </IF>
+        </div>
+
+      </div>
       <h1>Add new profile </h1>
       <form>
         <div>
