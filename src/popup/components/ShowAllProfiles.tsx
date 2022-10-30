@@ -16,6 +16,8 @@ const ShowAllProfiles = (): JSX.Element => {
   useEffect(() => {
     getProfiles();
   }, []);
+
+
   return (
     <div>
       <div className="container">

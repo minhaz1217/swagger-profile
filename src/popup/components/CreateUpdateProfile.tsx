@@ -7,12 +7,12 @@ import {Profile} from "../models/Profile";
 const AddNewProfile = (): JSX.Element => {
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [displayOrder, setDisplayOrder] = useState<number>(0);
   const [token, setToken] = useState<string>("");
+  const [displayOrder, setDisplayOrder] = useState<number>(0);
 
   const [nameValidated, setNameValidated] = useState<boolean>(false);
-  const [displayOrderValidated, setDisplayOrderValidated] = useState<boolean>(true);
   const [tokenValidated, setTokenValidated] = useState<boolean>(false);
+  const [displayOrderValidated, setDisplayOrderValidated] = useState<boolean>(true);
 
   const [updatedOnce, setUpdatedOnce] = useState<boolean>(false);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
@@ -20,12 +20,10 @@ const AddNewProfile = (): JSX.Element => {
   const location = useLocation<LocationState>();
   const history = useHistory();
 
-
   interface LocationState {
     pathName: string,
     profile: Profile
   }
-
 
   useEffect(() => {
     if (location.state?.profile != null && !updatedOnce) {
@@ -53,6 +51,7 @@ const AddNewProfile = (): JSX.Element => {
       goToShowAllPage();
     }
   };
+
   const goToShowAllPage = () => {
     history.push("/");
   };
@@ -111,6 +110,7 @@ const AddNewProfile = (): JSX.Element => {
     }
     return false;
   };
+
   const onClickSaveButton = async () => {
     if (allFieldsValidated()) {
       await saveToken();
@@ -120,7 +120,6 @@ const AddNewProfile = (): JSX.Element => {
   const onClickDeleteButton = async () => {
     setShowConfirm(true);
   };
-
 
   const onConfirmAccept = async () => {
     if (id == null || id == "") {
@@ -132,9 +131,11 @@ const AddNewProfile = (): JSX.Element => {
       goToShowAllPage();
     }
   };
+
   const onConfirmReject = () => {
     setShowConfirm(false);
   };
+
 
   return (
     <div className="container m-2" style={{width: "20em"}}>
