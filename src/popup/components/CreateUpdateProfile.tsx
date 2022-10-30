@@ -27,7 +27,6 @@ const AddNewProfile = (): JSX.Element => {
 
   useEffect(() => {
     if (location.state?.profile != null && !updatedOnce) {
-      console.log(location);
       setName(location.state.profile.name);
       setDisplayOrder(location.state.profile.displayOrder);
       setToken(location.state.profile.token);

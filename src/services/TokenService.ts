@@ -63,7 +63,6 @@ export const changeBearerToken = (token: string, name?: string) => {
     setTimeout(function() {
         // if logout button is showing we at first click on it, then we paste the token.
         let authButtons = document.getElementsByClassName("auth");
-        console.log(authButtons);
         for (let i = 0; i < authButtons.length; i++) {
           if (authButtons[i].innerHTML === "Logout") {
             authButtons[i].click();
