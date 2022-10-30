@@ -16,7 +16,7 @@ export const getStorageData = async (key: string) => {
   return data;
 };
 
-const printData = (data) => {
+const printData = (data) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   // if (data != null) console.log("Data Received: ", data);
 };
 const printError = (error) => {
