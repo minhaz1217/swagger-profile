@@ -64,6 +64,6 @@ test("Profile Buttons are showing", async () => {
   // All 3 edit button is present
   expect((await screen.findAllByTitle("Edit")).length).toEqual(3);
 
-  // All 3 delete button is present
-  expect((await screen.findAllByTitle("Delete")).length).toEqual(3);
+  // All 3 Copy to clipboard button is present
+  expect((await screen.findAllByTitle("Copy to clipboard")).length).toEqual(3);
 });

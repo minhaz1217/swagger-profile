@@ -34,8 +34,8 @@ describe("Profile component rendered correctly.", () => {
   });
 
 
-  it("Delete button rendered properly", () => {
-    expect(documentBody.getByTitle("Delete")).toBeInTheDocument();
+  it("Copy to clipboard button rendered properly", () => {
+    expect(documentBody.getByTitle("Copy to clipboard")).toBeInTheDocument();
   });
 
   it("Profile name showing properly.", () => {
