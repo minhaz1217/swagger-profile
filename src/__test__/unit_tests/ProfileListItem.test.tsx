@@ -14,12 +14,11 @@ jest.mock("webextension-polyfill", () => {
 describe("Profile component rendered correctly.", () => {
   let documentBody: RenderResult;
   const app =
-        <BrowserRouter>
-          <ProfileListItem
-            onProfileChangeCallback={() => { }}
-            profile={new Profile("Profile Name 1", "Profile Token 2", 0)}
-          />
-        </BrowserRouter>;
+    <BrowserRouter>
+      <ProfileListItem
+        profile={new Profile("Profile Name 1", "Profile Token 2", 0)}
+      />
+    </BrowserRouter>;
   beforeEach(() => {
     documentBody = render(app);
   });
