@@ -48,7 +48,7 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({profile}): JSX.Element
 
           <button className={"btn " + (copiedToClipboard ? "btn-success" : "btn-primary")} title="Copy to clipboard" onClick={onClickCopyButton} data-bs-placement="top" data-bs-title="Tooltip on top">
             <IF condition={!copiedToClipboard}>
-              <i className="bi bi-clipboard"></i>
+              <i className="bi bi-clipboard-plus"></i>
             </IF>
             <IF condition={copiedToClipboard}>
               <i className="bi bi-clipboard-check"></i>
