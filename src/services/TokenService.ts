@@ -85,7 +85,7 @@ export const changeBearerToken = (token: string, name?: string) => {
     }`;
 
   const setBearerTokenFunction = (token: string, name: string) => {
-    const alertMessage = `"Profile ${name} is set.\nApplied token: ${token}"`;
+    const alertMessage = `Profile ${name} is set.\nApplied token: ${token}`;
     // Open the form
     if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
       const openAuthFormButton: HTMLElement = document.querySelector(".auth-wrapper .authorize.locked");
