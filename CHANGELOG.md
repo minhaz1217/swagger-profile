@@ -1,10 +1,15 @@
 # Change Log
 
 All notable changes to this project will be documented in this file
-## [Unreleased] - yyyy-mm-dd
+<!-- ## [Unreleased] - yyyy-mm-dd -->
+
+## [1.2.0] - 2022-10-30
+
+### Added
 - Ability to copy token.
-- Delete button inside the edit page.
-- Set max height in show all page.
+
+### Changed
+- Moved the delete button inside the edit page.
 
 
 ## [1.1.0] - 2022-10-29
