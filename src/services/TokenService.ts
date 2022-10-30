@@ -38,8 +38,8 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
     return tab;
   };
 
-
   const tab = await getCurrentTab();
+
   await chrome.scripting.executeScript({
     target: {tabId: tab.id, allFrames: true},
     func: func as any,
@@ -49,41 +49,53 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
 
 
 // Changes the Bearer token by UI.
-export const changeBearerToken = (token: string, name?: string) => {
+export const changeBearerToken = async (token: string, name?: string) => {
   const alertMessage = `"Profile ${name} is set.\\nApplied token: ${token}"`;
   const setBearerTokenFunctionString = `{
-    // Open the form
-    if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
-        let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
-        openAuthFormButton.click();
-    }else if(document.querySelector(".auth-wrapper .authorize.unlocked") !== null){
-        let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.unlocked");
-        openAuthFormButton.click();
-    }
-    setTimeout(function() {
-        // if logout button is showing we at first click on it, then we paste the token.
-        let authButtons = document.getElementsByClassName("auth");
-        for (let i = 0; i < authButtons.length; i++) {
-          if (authButtons[i].innerHTML === "Logout") {
-            authButtons[i].click();
+    const setBearerTokenFunction = () => {
+      if (document.querySelector(".auth-wrapper .authorize.locked") === null && document.querySelector(".auth-wrapper .authorize.unlocked") === null) {
+        alert("Apply can only work in Swagger UI");
+        return;
+      }
+
+      // Open the form
+      if(document.querySelector(".auth-wrapper .authorize.locked") !== null){
+          let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.locked");
+          openAuthFormButton.click();
+      }else if(document.querySelector(".auth-wrapper .authorize.unlocked") !== null){
+          let openAuthFormButton = document.querySelector(".auth-wrapper .authorize.unlocked");
+          openAuthFormButton.click();
+      }
+      setTimeout(function() {
+          // if logout button is showing we at first click on it, then we paste the token.
+          let authButtons = document.getElementsByClassName("auth");
+          for (let i = 0; i < authButtons.length; i++) {
+            if (authButtons[i].innerHTML === "Logout") {
+              authButtons[i].click();
+            }
           }
-        }
-  
-        var tokenInput = document.querySelector(".auth-container input");
-        var authButton = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
-        var closeButton = document.querySelector("button.btn-done");
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(tokenInput, "${token}");
-        
-        var inputEvent = new Event('input', { bubbles: true});
-        tokenInput.dispatchEvent(inputEvent);
-        authButton.click();
-        closeButton.click();
-        alert(${alertMessage});
-    }, 500);
+    
+          var tokenInput = document.querySelector(".auth-container input");
+          var authButton = document.querySelector(".auth-btn-wrapper .modal-btn.auth");
+          var closeButton = document.querySelector("button.btn-done");
+          var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+          nativeInputValueSetter.call(tokenInput, "${token}");
+          
+          var inputEvent = new Event('input', { bubbles: true});
+          tokenInput.dispatchEvent(inputEvent);
+          authButton.click();
+          closeButton.click();
+          alert(${alertMessage});
+      }, 500);
+    }
+    setBearerTokenFunction();
     }`;
 
   const setBearerTokenFunction = (token: string, name: string) => {
+    if (document.querySelector(".auth-wrapper .authorize.locked") === null && document.querySelector(".auth-wrapper .authorize.unlocked") === null) {
+      alert("Apply can only work in Swagger UI");
+      return;
+    }
     const alertMessage = `Profile ${name} is set.\nApplied token: ${token}`;
     // Open the form
     if (document.querySelector(".auth-wrapper .authorize.locked") !== null) {
@@ -116,11 +128,15 @@ export const changeBearerToken = (token: string, name?: string) => {
       alert(alertMessage);
     }, 500);
   };
-  const browser = detectBrowser();
-  if (browser === Browser.Chromium) {
-    executeBrowserScriptForChrome(setBearerTokenFunction, [token, name]);
-  } else {
-    executeBrowserScriptForFirefox(setBearerTokenFunctionString);
+  try {
+    const browser = detectBrowser();
+    if (browser === Browser.Chromium) {
+      await executeBrowserScriptForChrome(setBearerTokenFunction, [token, name]);
+    } else {
+      executeBrowserScriptForFirefox(setBearerTokenFunctionString);
+    }
+  } catch (ex) {
+    console.log("Exception", ex);
   }
 };
 

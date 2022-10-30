@@ -12,11 +12,11 @@ const ProfileListItem: React.FC<ProfileListItemProps> = ({profile}): JSX.Element
   const [copiedToClipboard, setCopiedToClipboard] = useState<boolean>(false);
   const history = useHistory();
 
-  const onClickApplyButton = () => {
+  const onClickApplyButton = async () => {
     if (profile?.token == null || profile?.token == "") {
       return;
     }
-    changeBearerToken(profile.token, profile.name);
+    await changeBearerToken(profile.token, profile.name);
   };
 
   const onClickEditButton = () => {
