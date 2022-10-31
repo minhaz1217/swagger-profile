@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Link, useHistory, useLocation} from "react-router-dom";
-import {createProfile, deleteProfile, updateProfile} from "../../services/SwaggerProfileService";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { createProfile, deleteProfile, updateProfile } from "../../services/SwaggerProfileService";
 import IF from "../../shared-components/IF";
-import {Profile} from "../models/Profile";
+import { Profile } from "../models/Profile";
 
 const AddNewProfile = (): JSX.Element => {
   const [id, setId] = useState<string>("");
@@ -137,7 +137,7 @@ const AddNewProfile = (): JSX.Element => {
 
 
   return (
-    <div className="container m-2" style={{width: "20em"}}>
+    <div className="container m-2" style={{ width: "20em" }}>
 
       <div className="row m-0">
 
@@ -167,7 +167,12 @@ const AddNewProfile = (): JSX.Element => {
         </div>
 
       </div>
-      <h1>Add new profile </h1>
+      <IF condition={updatedOnce}>
+        <h1>Edit profile </h1>
+      </IF>
+      <IF condition={!updatedOnce}>
+        <h1>Add new profile </h1>
+      </IF>
       <form>
         <div>
           <div className="mb-3">
@@ -191,6 +196,7 @@ const AddNewProfile = (): JSX.Element => {
               placeholder="Token"
               value={token}
               onChange={validateTokenField}
+              rows={7}
               required
             ></textarea>
             <IF condition={!tokenValidated}>
