@@ -8,10 +8,12 @@ When working with swagger, I had to keep track of 10+ different JWT token. I use
 
 So I made this extension to do all these. It can apply token in swagger UI page. Or it can copy to clipboard.
 
+# Published
+Firefox - [https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/](https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/)
 
 
 # Objectives/Challenges
-I want to try different things for this project. As I've never started react, webpack, eslint, typescript and testing from scratch this project will be about these also.
+I want to try different things for this project. As I've never started react, webpack, eslint, typescript and testing from scratch, this project will be about these also.
 1. The main objective I want an extension that I will be able to manage my different swagger tokens (admin, client, manager, developer etc) with.
 2. The extension should support both **firefox** and **chrome**.
 3. Build the extension with basic html, bootstrap and js.
