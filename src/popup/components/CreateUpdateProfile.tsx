@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import { createProfile, deleteProfile, updateProfile } from "../../services/SwaggerProfileService";
+import React, {useEffect, useState} from "react";
+import {Link, useHistory, useLocation} from "react-router-dom";
+import {createProfile, deleteProfile, updateProfile} from "../../services/SwaggerProfileService";
 import IF from "../../shared-components/IF";
-import { Profile } from "../models/Profile";
+import {Profile} from "../models/Profile";
 
 const AddNewProfile = (): JSX.Element => {
   const [id, setId] = useState<string>("");
@@ -137,7 +137,7 @@ const AddNewProfile = (): JSX.Element => {
 
 
   return (
-    <div className="container m-2" style={{ width: "20em" }}>
+    <div className="container m-2" style={{width: "20em"}}>
 
       <div className="row m-0">
 
