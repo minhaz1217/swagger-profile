@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file
 <!-- ## [Unreleased] - yyyy-mm-dd -->
 
+
+## [1.2.1] - 2022-11-04
+
+### Fixed
+- Profile not applicable alert message was showing 2 times in chromium based browsers.
+
 ## [1.2.0] - 2022-10-30
 
 ### Added
