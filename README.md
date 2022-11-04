@@ -11,6 +11,9 @@ So I made this extension to do all these. It can apply token in swagger UI page.
 # Published
 Firefox - [https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/](https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/)
 
+Chrome - [https://chrome.google.com/webstore/detail/swagger-profile-manager/eglckgnbpfmpdjjljhgkolgpggfiknio](https://chrome.google.com/webstore/detail/swagger-profile-manager/eglckgnbpfmpdjjljhgkolgpggfiknio)
+
+Edge - [https://microsoftedge.microsoft.com/addons/detail/swagger-profile-manager/kngkmecaajohnkfoadpiemcpoepdkbjh](https://microsoftedge.microsoft.com/addons/detail/swagger-profile-manager/kngkmecaajohnkfoadpiemcpoepdkbjh)
 
 # Objectives/Challenges
 I want to try different things for this project. As I've never started react, webpack, eslint, typescript and testing from scratch, this project will be about these also.
