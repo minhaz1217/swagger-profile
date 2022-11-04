@@ -39,9 +39,8 @@ const executeBrowserScriptForChrome = async (func: Function, args: any) => {
   };
 
   const tab = await getCurrentTab();
-
   await chrome.scripting.executeScript({
-    target: {tabId: tab.id, allFrames: true},
+    target: {tabId: tab.id, allFrames: false},
     func: func as any,
     args: args,
   });
