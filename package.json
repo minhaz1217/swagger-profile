@@ -1,7 +1,7 @@
 {
-  "name": "swagger-profile",
+  "name": "swagger-token-manager",
   "version": "1.0.0",
-  "description": "An extension to create and use swagger authorizations keys.",
+  "description": "An extension to save and use swagger bearer tokens.",
   "main": "index.js",
   "scripts": {
     "dev": "cd dist/manifest-v2 & web-ext run",
