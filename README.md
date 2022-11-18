@@ -9,7 +9,7 @@ When working with swagger, I had to keep track of 10+ different JWT token. I use
 So I made this extension to do all these. It can apply token in swagger UI page. Or it can copy to clipboard.
 
 # Published
-Firefox - [https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/](https://addons.mozilla.org/en-US/firefox/addon/swagger-profile-manager/)
+Firefox - [https://addons.mozilla.org/en-US/firefox/addon/swagger-token-manager/](https://addons.mozilla.org/en-US/firefox/addon/swagger-token-manager/)
 
 Chrome - [https://chrome.google.com/webstore/detail/swagger-profile-manager/eglckgnbpfmpdjjljhgkolgpggfiknio](https://chrome.google.com/webstore/detail/swagger-profile-manager/eglckgnbpfmpdjjljhgkolgpggfiknio)
 
