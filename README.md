@@ -1,4 +1,4 @@
-# Swagger Profile
+# Swagger Token Manager
 
 A firefox and chrome extension that will help you manage different bearer token profile for swagger.
 
@@ -27,6 +27,10 @@ I want to try different things for this project. As I've never started react, we
 8. Integrate **typescript** on this existing project.
 
 # Images
+
+* Got featured in chrome web store
+
+![Got featured in chrome web store](<images/got featured in chrome web store.png>)
 
 * Apply token in with the click of a button
 
