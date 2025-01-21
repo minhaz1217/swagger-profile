@@ -25,3 +25,25 @@ I want to try different things for this project. As I've never started react, we
 6. Make the extension fully working with only these constraints first.
 7. Integrate and configure **eslint**.
 8. Integrate **typescript** on this existing project.
+
+# Images
+
+* Apply token in with the click of a button
+
+![Apply token in swagger](<images/01. apply token in swagger ui.png>)
+
+* Manage multiple configuration
+
+![manage multiple configuration](<images/02. view saved profiles.png>)
+
+* Add profiles and token
+
+![add profiles with token](<images/03. add profiles with token.png>)
+
+* Copy token to clipboard
+
+![Copy token to clipboard](<images/04. copy token to clipboard.png>)
+
+* Update and delete profile
+
+![update and delete profile](<images/05. edit and delete profile.png>)
